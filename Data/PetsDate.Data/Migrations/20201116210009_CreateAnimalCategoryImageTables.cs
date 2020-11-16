@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace PetsDate.Data.Migrations
+﻿namespace PetsDate.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class CreateAnimalCategoryImageTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +18,7 @@ namespace PetsDate.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -39,7 +40,7 @@ namespace PetsDate.Data.Migrations
                     Color = table.Column<string>(nullable: true),
                     Weight = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -67,7 +68,7 @@ namespace PetsDate.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     AnimalId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-                    Extension = table.Column<string>(nullable: true)
+                    Extension = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
