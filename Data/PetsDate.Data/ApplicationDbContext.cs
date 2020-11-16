@@ -23,6 +23,13 @@
         {
         }
 
+        // Add new tables
+        public DbSet<Animal> Animals { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
