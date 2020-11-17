@@ -34,6 +34,8 @@
 
         public DbSet<ClinicImage> ClinicImages { get; set; }
 
+        public DbSet<Publication> Publications { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
