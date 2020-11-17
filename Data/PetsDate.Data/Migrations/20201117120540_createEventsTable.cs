@@ -4,12 +4,12 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class addTablePublications : Migration
+    public partial class createEventsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Publications",
+                name: "Events",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -17,14 +17,17 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    BeginEvent = table.Column<DateTime>(nullable: false),
+                    EndEvent = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publications", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Publications_AspNetUsers_UserId",
+                        name: "FK_Events_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -32,20 +35,20 @@
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publications_IsDeleted",
-                table: "Publications",
+                name: "IX_Events_IsDeleted",
+                table: "Events",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publications_UserId",
-                table: "Publications",
+                name: "IX_Events_UserId",
+                table: "Events",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Publications");
+                name: "Events");
         }
     }
 }
