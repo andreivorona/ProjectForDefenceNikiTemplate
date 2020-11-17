@@ -16,7 +16,6 @@
     using PetsDate.Data.Models;
     using PetsDate.Data.Repositories;
     using PetsDate.Data.Seeding;
-    using PetsDate.Services.Data;
     using PetsDate.Services.Messaging;
 
     public static class Program
@@ -50,9 +49,6 @@
         {
             var sw = Stopwatch.StartNew();
 
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
         }
@@ -79,7 +75,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
     }
 }
