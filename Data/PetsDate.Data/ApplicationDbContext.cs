@@ -42,6 +42,10 @@
 
         public DbSet<HotelImage> HotelImages { get; set; }
 
+        public DbSet<SosSignal> SosSignals { get; set; }
+
+        public DbSet<SosImage> SosImages { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
