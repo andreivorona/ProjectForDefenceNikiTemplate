@@ -4,7 +4,7 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class addTablesHotelsAndHotelImages : Migration
+    public partial class AddTablesHotelsAndHotelImages : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@
                     Name = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     HotelId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    Extension = table.Column<string>(nullable: true)
+                    Extension = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {

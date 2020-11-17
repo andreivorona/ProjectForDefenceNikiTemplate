@@ -11,7 +11,7 @@ namespace PetsDate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20201117130147_createTablesSosSignalsAndSosImages")]
-    partial class createTablesSosSignalsAndSosImages
+    partial class CreateTablesSosSignalsAndSosImages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

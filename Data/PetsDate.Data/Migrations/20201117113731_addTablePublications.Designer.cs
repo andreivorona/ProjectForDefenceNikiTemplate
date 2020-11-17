@@ -11,7 +11,7 @@ namespace PetsDate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20201117113731_addTablePublications")]
-    partial class addTablePublications
+    partial class AddTablePublications
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

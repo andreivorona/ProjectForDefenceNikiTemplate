@@ -11,7 +11,7 @@ namespace PetsDate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20201117120540_createEventsTable")]
-    partial class createEventsTable
+    partial class CreateEventsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

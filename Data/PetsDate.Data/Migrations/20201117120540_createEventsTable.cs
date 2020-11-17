@@ -4,7 +4,7 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class createEventsTable : Migration
+    public partial class CreateEventsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,7 @@
                     Location = table.Column<string>(nullable: true),
                     BeginEvent = table.Column<DateTime>(nullable: false),
                     EndEvent = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {

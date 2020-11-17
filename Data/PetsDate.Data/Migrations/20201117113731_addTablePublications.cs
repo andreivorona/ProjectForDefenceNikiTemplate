@@ -4,7 +4,7 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class addTablePublications : Migration
+    public partial class AddTablePublications : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

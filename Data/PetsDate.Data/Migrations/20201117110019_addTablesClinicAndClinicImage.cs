@@ -4,7 +4,7 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class addTablesClinicAndClinicImage : Migration
+    public partial class AddTablesClinicAndClinicImage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
