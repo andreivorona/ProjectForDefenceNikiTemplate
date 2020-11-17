@@ -1,9 +1,16 @@
 ﻿namespace PetsDate.Data.Models
 {
+    using System.Collections.Generic;
+
     using PetsDate.Data.Common.Models;
 
     public class Animal : BaseDeletableModel<int>
     {
+        public Animal()
+        {
+            this.Images = new HashSet<Image>();
+        }
+
         public string Name { get; set; }
 
         public int Age { get; set; }
@@ -21,5 +28,7 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
     }
 }
