@@ -21,5 +21,7 @@
         public int SosSignslsCount { get; set; }
 
         public int SosImagesCount { get; set; }
+
+        public int CategoriesCount { get; set; }
     }
 }

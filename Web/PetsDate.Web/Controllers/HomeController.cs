@@ -22,15 +22,16 @@
             var viewModel = new IndexViewModel
             {
                 AnimalsCount = this.db.Animals.Count(),
-                AnimalImagesCount = this.db.Animals.Select(x => x.Images).Count(),
+                AnimalImagesCount = this.db.Images.Count(),
                 ClinicCount = this.db.Clinics.Count(),
-                ClinicImagesCount = this.db.Clinics.Select(x => x.ClinicImages).Count(),
+                ClinicImagesCount = this.db.ClinicImages.Count(),
                 EventsCount = this.db.Events.Count(),
-                HotelImagesCount = this.db.Hotels.Select(x => x.HotelImages).Count(),
+                HotelImagesCount = this.db.HotelImages.Count(),
                 HoteslCount = this.db.Hotels.Count(),
                 PublicationCount = this.db.Publications.Count(),
                 SosSignslsCount = this.db.SosSignals.Count(),
-                SosImagesCount = this.db.SosSignals.Select(x => x.SosImages).Count(),
+                SosImagesCount = this.db.SosImages.Count(),
+                CategoriesCount = this.db.Categories.Count(),
             };
 
             return this.View(viewModel);
