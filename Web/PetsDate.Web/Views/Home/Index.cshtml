@@ -1,9 +1,51 @@
 ﻿@using PetsDate.Common
+@model PetsDate.Web.ViewModels.Home.IndexViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>We have:</p>
+    <ul>
+        <li>
+            Animals: @Model.AnimalsCount
+        </li>
+
+        <li>
+            Animal Images: @Model.AnimalImagesCount
+        </li>
+
+        <li>
+            Clinics: @Model.ClinicCount
+        </li>
+
+        <li>
+            Clinic Images: @Model.ClinicImagesCount
+        </li>
+
+        <li>
+            Publications: @Model.PublicationCount
+        </li>
+
+        <li>
+            Events: @Model.EventsCount
+        </li>
+
+        <li>
+            Hotels: @Model.HoteslCount
+        </li>
+
+        <li>
+            Hotel Images: @Model.HotelImagesCount
+        </li>
+
+        <li>
+            Sos Signals: @Model.SosSignslsCount
+        </li>
+
+        <li>
+            Sos Signsl Images: @Model.SosImagesCount
+        </li>
+    </ul>
 </div>
