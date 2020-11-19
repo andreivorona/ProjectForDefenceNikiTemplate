@@ -16,6 +16,7 @@
     using PetsDate.Data.Models;
     using PetsDate.Data.Repositories;
     using PetsDate.Data.Seeding;
+    using PetsDate.Services.Data;
     using PetsDate.Services.Mapping;
     using PetsDate.Services.Messaging;
     using PetsDate.Web.ViewModels;
@@ -61,6 +62,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IGetCountsService, GetCountsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
