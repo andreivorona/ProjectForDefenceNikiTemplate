@@ -35,8 +35,7 @@
             IDeletableEntityRepository<Hotel> hotelsRepository,
             IRepository<HotelImage> hotelImagesRepository,
             IDeletableEntityRepository<SosSignal> sosSignslsRepository,
-            IRepository<SosImage> sosImagesRepository
-            )
+            IRepository<SosImage> sosImagesRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.animalsRepository = animalsRepository;
