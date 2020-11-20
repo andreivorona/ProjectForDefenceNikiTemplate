@@ -6,18 +6,22 @@
     {
         [MinLength(2)]
         [Required]
+        [Display(Name = "Name as text")]
         public string Name { get; set; }
 
         [Required]
-        [Range(1, 400)]
+        [Range(0, 400)]
+        [Display(Name = "Age is integer")]
         public int Age { get; set; }
 
         [Required]
         [MinLength(2)]
+        [Display(Name = "Color as text")]
         public string Color { get; set; }
 
         [Required]
-        [Range(1, 10000)]
+        [Range(0, 10000)]
+        [Display(Name = "Weight in kilograms")]
         public double Weight { get; set; }
 
         public int CategoryId { get; set; }
