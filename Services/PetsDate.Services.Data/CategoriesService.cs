@@ -17,7 +17,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllKeyValuePairs()
         {
-            return this.categoriesRepository.All().Select(x => new
+            return this.categoriesRepository.AllAsNoTracking().Select(x => new
             {
                 x.Id,
                 x.Name,
