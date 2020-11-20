@@ -3,14 +3,19 @@
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Animal;
+    using System.Threading.Tasks;
 
     public class AnimalController : Controller
     {
         private readonly ICategoriesService categoriesService;
+        private readonly IAnimalService animalService;
 
-        public AnimalController(ICategoriesService categoriesService)
+        public AnimalController(
+            ICategoriesService categoriesService,
+            IAnimalService animalService)
         {
             this.categoriesService = categoriesService;
+            this.animalService = animalService;
         }
 
         public IActionResult Create()
@@ -22,7 +27,7 @@
         }
 
         [HttpPost]
-        public IActionResult Create(CreateAnimalInputModel input)
+        public async Task<IActionResult> Create(CreateAnimalInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -32,6 +37,8 @@
             }
 
             // create animal using service method
+            await this.animalService.CreateAsync(input);
+
             // todo redirect to animal info page
             return this.Redirect("/");
         }
