@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Web.ViewModels.Animal
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class CreateAnimalInputModel
@@ -25,5 +26,7 @@
         public double Weight { get; set; }
 
         public int CategoryId { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
     }
 }

@@ -1,13 +1,24 @@
 ﻿namespace PetsDate.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Animal;
 
     public class AnimalController : Controller
     {
+        private readonly ICategoriesService categoriesService;
+
+        public AnimalController(ICategoriesService categoriesService)
+        {
+            this.categoriesService = categoriesService;
+        }
+
         public IActionResult Create()
         {
-            return this.View();
+            var viewModel = new CreateAnimalInputModel();
+            viewModel.CategoriesItems = this.categoriesService.GetAllKeyValuePairs();
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -15,7 +26,9 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                input.CategoriesItems = this.categoriesService.GetAllKeyValuePairs();
+
+                return this.View(input);
             }
 
             // create animal using service method
