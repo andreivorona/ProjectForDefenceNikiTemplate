@@ -4,9 +4,11 @@
     this.ViewData["Title"] = "Add new Animal";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<div class="text-center">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
 
-<form method="post">
+<form method="post" class="col-md-6 offset-3">
     
     <section class="form-group">
         <label asp-for="Name"></label>
