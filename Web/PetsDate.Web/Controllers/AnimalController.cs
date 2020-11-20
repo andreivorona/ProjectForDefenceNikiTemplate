@@ -1,9 +1,10 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Animal;
-    using System.Threading.Tasks;
 
     public class AnimalController : Controller
     {
