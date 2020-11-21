@@ -1,0 +1,36 @@
+﻿@model PetsDate.Web.ViewModels.Hotel.CreateHotelInputModel
+@{
+    this.ViewData["Title"] = "Add new Hotel";
+}
+
+<div class="text-center">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<form method="post" class="col-md-6 offset-3">
+    <section class="form-group">
+        <label asp-for="Name"></label>
+
+        <input asp-for="Name" class="form-control" />
+
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </section>
+
+    <section class="form-group">
+        <label asp-for="Location"></label>
+
+        <input asp-for="Location" class="form-control" />
+
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </section>
+
+    <section class="form-group">
+        <label asp-for="Description"></label>
+
+        <textarea asp-for="Description" class="form-control"></textarea>
+
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </section>
+
+    <input type="submit" class="btn btn-primary" />
+</form>
