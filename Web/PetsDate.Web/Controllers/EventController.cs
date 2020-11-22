@@ -20,7 +20,7 @@
         {
             var model = new CreateEventInputModel
             {
-                BeginEvent = DateTime.UtcNow,
+                BeginEvent = DateTime.Parse(DateTime.UtcNow.ToString("f")),
             };
 
             return this.View(model);
