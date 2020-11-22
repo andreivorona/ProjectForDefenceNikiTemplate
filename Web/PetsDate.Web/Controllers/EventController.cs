@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,12 @@
 
         public IActionResult Create()
         {
-            return this.View();
+            var model = new CreateEventInputModel
+            {
+                BeginEvent = DateTime.UtcNow,
+            };
+
+            return this.View(model);
         }
 
         [HttpPost]

@@ -1,11 +1,11 @@
-﻿using PetsDate.Data.Common.Repositories;
-using PetsDate.Data.Models;
-using PetsDate.Web.ViewModels.Event;
-using System;
-using System.Threading.Tasks;
-
-namespace PetsDate.Services.Data
+﻿namespace PetsDate.Services.Data
 {
+    using System.Threading.Tasks;
+
+    using PetsDate.Data.Common.Repositories;
+    using PetsDate.Data.Models;
+    using PetsDate.Web.ViewModels.Event;
+
     public class EventService : IEventService
     {
         private readonly IDeletableEntityRepository<Event> eventsRepository;
