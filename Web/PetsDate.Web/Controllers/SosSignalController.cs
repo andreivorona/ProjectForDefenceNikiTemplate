@@ -2,6 +2,7 @@
 {
     using System.IO;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Services.Data;
@@ -25,6 +26,7 @@
             return this.View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(CreateSosSignalInputModel input)
         {
@@ -51,8 +53,6 @@
             }
 
             await this.sosSignalService.CreateAsync(input);
-
-            
 
             // todo return to Clinic info
             return this.Redirect("/");

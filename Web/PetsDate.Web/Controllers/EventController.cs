@@ -26,6 +26,7 @@
             return this.View(model);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(CreateEventInputModel input)
         {

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-
-namespace PetsDate.Web.ViewModels.SosSignal
+﻿namespace PetsDate.Web.ViewModels.SosSignal
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+
     public class CreateSosSignalInputModel
     {
         [Required]
