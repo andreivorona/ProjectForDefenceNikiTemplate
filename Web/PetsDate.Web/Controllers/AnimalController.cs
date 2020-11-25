@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Animal;
@@ -19,6 +20,7 @@
             this.animalService = animalService;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateAnimalInputModel();
@@ -27,6 +29,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAnimalInputModel input)
         {

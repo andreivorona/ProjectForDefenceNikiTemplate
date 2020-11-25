@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Hotel;
@@ -15,11 +16,13 @@
             this.hotelService = hotelService;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return this.View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateHotelInputModel input)
         {
