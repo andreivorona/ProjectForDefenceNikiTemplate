@@ -25,6 +25,7 @@
         [Display(Name = "Weight in kilograms")]
         public double Weight { get; set; }
 
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }

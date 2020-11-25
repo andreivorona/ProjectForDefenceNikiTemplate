@@ -21,6 +21,7 @@
             var model = new CreateEventInputModel
             {
                 BeginEvent = DateTime.Parse(DateTime.UtcNow.ToString("f")),
+                EndEvent = DateTime.Parse(DateTime.UtcNow.AddDays(1).ToString("f")),
             };
 
             return this.View(model);
