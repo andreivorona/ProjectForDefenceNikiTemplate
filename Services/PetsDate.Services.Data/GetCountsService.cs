@@ -19,6 +19,7 @@
         private readonly IRepository<HotelImage> hotelImagesRepository;
         private readonly IDeletableEntityRepository<SosSignal> sosSignslsRepository;
         private readonly IRepository<SosImage> sosImagesRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
 
         public GetCountsService(
             IDeletableEntityRepository<Category> categoriesRepository,
@@ -31,7 +32,8 @@
             IDeletableEntityRepository<Hotel> hotelsRepository,
             IRepository<HotelImage> hotelImagesRepository,
             IDeletableEntityRepository<SosSignal> sosSignslsRepository,
-            IRepository<SosImage> sosImagesRepository)
+            IRepository<SosImage> sosImagesRepository,
+            IDeletableEntityRepository<ApplicationUser> userRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.animalsRepository = animalsRepository;
@@ -44,12 +46,14 @@
             this.hotelImagesRepository = hotelImagesRepository;
             this.sosSignslsRepository = sosSignslsRepository;
             this.sosImagesRepository = sosImagesRepository;
+            this.userRepository = userRepository;
         }
 
         public IndexViewModel GetCounts()
         {
             var data = new IndexViewModel
             {
+                UsersCount = this.userRepository.All().Count(),
                 AnimalsCount = this.animalsRepository.All().Count(),
                 AnimalImagesCount = this.imagesRepository.All().Count(),
                 ClinicCount = this.clinicsRepository.All().Count(),

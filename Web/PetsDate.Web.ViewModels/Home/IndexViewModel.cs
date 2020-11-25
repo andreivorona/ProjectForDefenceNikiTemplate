@@ -2,6 +2,8 @@
 {
     public class IndexViewModel
     {
+        public int UsersCount { get; set; }
+
         public int AnimalsCount { get; set; }
 
         public int AnimalImagesCount { get; set; }
