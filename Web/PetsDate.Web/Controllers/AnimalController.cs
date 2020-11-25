@@ -27,7 +27,6 @@
             return this.View(viewModel);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAnimalInputModel input)
         {

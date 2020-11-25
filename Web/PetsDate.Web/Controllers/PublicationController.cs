@@ -20,7 +20,6 @@
             return this.View();
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(CreatePublicationInputModel input)
         {

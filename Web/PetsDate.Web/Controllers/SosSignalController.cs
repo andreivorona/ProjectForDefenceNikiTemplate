@@ -26,7 +26,6 @@
             return this.View();
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(CreateSosSignalInputModel input)
         {
