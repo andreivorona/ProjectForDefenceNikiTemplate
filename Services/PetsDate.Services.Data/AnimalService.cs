@@ -10,7 +10,8 @@
     {
         private readonly IDeletableEntityRepository<Animal> animalsRepository;
 
-        public AnimalService(IDeletableEntityRepository<Animal> animalsRepository)
+        public AnimalService(
+            IDeletableEntityRepository<Animal> animalsRepository)
         {
             this.animalsRepository = animalsRepository;
         }
