@@ -16,10 +16,11 @@
             this.animalsRepository = animalsRepository;
         }
 
-        public async Task CreateAsync(CreateAnimalInputModel input)
+        public async Task CreateAsync(CreateAnimalInputModel input, string userId)
         {
             var animal = new Animal
             {
+                UserId = userId,
                 CategoryId = input.CategoryId,
                 Name = input.Name,
                 Age = input.Age,

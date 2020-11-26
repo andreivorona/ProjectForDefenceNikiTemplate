@@ -6,6 +6,6 @@
 
     public interface IAnimalService
     {
-        Task CreateAsync(CreateAnimalInputModel input);
+        Task CreateAsync(CreateAnimalInputModel input, string userId);
     }
 }
