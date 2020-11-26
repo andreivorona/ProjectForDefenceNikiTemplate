@@ -4,7 +4,9 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.SosSignal;
 
@@ -12,13 +14,16 @@
     {
         private readonly ISosSignalService sosSignalService;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public SosSignalController(
             ISosSignalService sosSignalService,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            UserManager<ApplicationUser> userManager)
         {
             this.sosSignalService = sosSignalService;
             this.webHostEnvironment = webHostEnvironment;
+            this.userManager = userManager;
         }
 
         public IActionResult Create()
@@ -51,7 +56,9 @@
                 return this.View(input);
             }
 
-            await this.sosSignalService.CreateAsync(input);
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.sosSignalService.CreateAsync(input, user.Id);
 
             // todo return to Clinic info
             return this.Redirect("/");

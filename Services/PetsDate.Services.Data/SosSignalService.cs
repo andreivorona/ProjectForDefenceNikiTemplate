@@ -16,10 +16,11 @@
             this.sosSignalsRepository = sosSignalsRepository;
         }
 
-        public async Task CreateAsync(CreateSosSignalInputModel input)
+        public async Task CreateAsync(CreateSosSignalInputModel input, string userId)
         {
             var sosSignal = new SosSignal
             {
+                UserId = userId,
                 Name = input.Name,
                 Location = input.Location,
                 Description = input.Description,
