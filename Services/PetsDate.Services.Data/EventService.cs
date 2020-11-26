@@ -15,10 +15,11 @@
             this.eventsRepository = eventsRepository;
         }
 
-        public async Task CreateAsync(CreateEventInputModel input)
+        public async Task CreateAsync(CreateEventInputModel input, string userId)
         {
             var eventItem = new Event
             {
+                UserId = userId,
                 Name = input.Name,
                 Location = input.Location,
                 BeginEvent = input.BeginEvent,

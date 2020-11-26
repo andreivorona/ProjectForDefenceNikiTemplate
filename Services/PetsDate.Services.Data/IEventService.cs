@@ -6,6 +6,6 @@
 
     public interface IEventService
     {
-        Task CreateAsync(CreateEventInputModel input);
+        Task CreateAsync(CreateEventInputModel input, string userId);
     }
 }

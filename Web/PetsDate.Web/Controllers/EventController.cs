@@ -4,17 +4,23 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Event;
 
     public class EventController : Controller
     {
         private readonly IEventService eventService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public EventController(IEventService eventService)
+        public EventController(
+            IEventService eventService,
+            UserManager<ApplicationUser> userManager)
         {
             this.eventService = eventService;
+            this.userManager = userManager;
         }
 
         [Authorize]
@@ -38,7 +44,9 @@
                 return this.View(input);
             }
 
-            await this.eventService.CreateAsync(input);
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.eventService.CreateAsync(input, user.Id);
 
             // todo return to Clinic info
             return this.Redirect("/");
