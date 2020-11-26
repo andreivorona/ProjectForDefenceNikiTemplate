@@ -14,7 +14,8 @@
         private readonly IClinicService clinicService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ClinicController(IClinicService clinicService,
+        public ClinicController(
+            IClinicService clinicService,
             UserManager<ApplicationUser> userManager)
         {
             this.clinicService = clinicService;

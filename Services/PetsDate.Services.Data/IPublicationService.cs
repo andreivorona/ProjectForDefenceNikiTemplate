@@ -6,6 +6,6 @@
 
     public interface IPublicationService
     {
-        Task CreateAsync(CreatePublicationInputModel input);
+        Task CreateAsync(CreatePublicationInputModel input, string userId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace PetsDate.Services.Data
 {
     using System.Threading.Tasks;
+
     using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
     using PetsDate.Web.ViewModels.Hotel;

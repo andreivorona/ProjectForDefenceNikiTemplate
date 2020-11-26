@@ -15,11 +15,12 @@
             this.publicationRepository = publicationRepository;
         }
 
-        public async Task CreateAsync(CreatePublicationInputModel input)
+        public async Task CreateAsync(CreatePublicationInputModel input, string userId)
         {
             var publication = new Publication
             {
-                 Description = input.Description,
+                UserId = userId,
+                Description = input.Description,
             };
 
             await this.publicationRepository.AddAsync(publication);
