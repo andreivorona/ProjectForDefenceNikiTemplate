@@ -46,6 +46,8 @@
 
         public DbSet<SosImage> SosImages { get; set; }
 
+        public DbSet<AnimalImage> AnimalImages { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -67,6 +69,8 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<AnimalImage>().HasKey(x => new { x.AnimalId, x.ImageId });
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

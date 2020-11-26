@@ -6,11 +6,6 @@
 
     public class Animal : BaseDeletableModel<int>
     {
-        public Animal()
-        {
-            this.Images = new HashSet<Image>();
-        }
-
         public string Name { get; set; }
 
         public int Age { get; set; }
@@ -29,6 +24,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<AnimalImage> Images { get; set; } = new HashSet<AnimalImage>();
     }
 }

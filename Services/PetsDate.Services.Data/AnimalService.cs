@@ -48,7 +48,7 @@
                     Weight = x.Weight,
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
-                    ImageUrl = "/AnimalImages/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                    ImageUrl = "/AnimalImages/",
                 }).ToList();
             //// 1-12 - page 1  skip 0  (page - 1) * itemsPerPage
             // 13-24 - page 2  skip 12
