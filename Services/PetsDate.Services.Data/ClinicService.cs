@@ -15,10 +15,11 @@
             this.clinicsRepository = clinicsRepository;
         }
 
-        public async Task CreateAsync(CreateClinicInputModel input)
+        public async Task CreateAsync(CreateClinicInputModel input, string userId)
         {
             var clinic = new Clinic
             {
+                UserId = userId,
                 Name = input.Name,
                 Location = input.Location,
             };

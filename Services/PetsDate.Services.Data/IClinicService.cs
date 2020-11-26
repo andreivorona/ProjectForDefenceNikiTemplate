@@ -6,6 +6,6 @@
 
     public interface IClinicService
     {
-        Task CreateAsync(CreateClinicInputModel input);
+        Task CreateAsync(CreateClinicInputModel input, string userId);
     }
 }
