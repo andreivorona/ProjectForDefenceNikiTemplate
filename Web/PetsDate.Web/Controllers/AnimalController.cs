@@ -54,7 +54,19 @@
             await this.animalService.CreateAsync(input, user.Id);
 
             // todo redirect to animal info page
-            return this.Redirect("/");
+            return this.Redirect("/Animal/All");
+        }
+
+        [Authorize]
+        public IActionResult All(int id)
+        {
+            var viewModel = new AnimalListViewModel
+            {
+                PageNumber = id,
+                Animals = this.animalService.GetAll(id),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

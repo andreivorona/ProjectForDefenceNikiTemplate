@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.SosSignal;
@@ -15,15 +16,18 @@
         private readonly ISosSignalService sosSignalService;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IRepository<SosImage> imagesRepository;
 
         public SosSignalController(
             ISosSignalService sosSignalService,
             IWebHostEnvironment webHostEnvironment,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IRepository<SosImage> imagesRepository)
         {
             this.sosSignalService = sosSignalService;
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
+            this.imagesRepository = imagesRepository;
         }
 
         public IActionResult Create()
@@ -36,6 +40,14 @@
         {
             if (input.Image.FileName.EndsWith(".png") || input.Image.FileName.EndsWith(".jpg"))
             {
+                var sosImage = new SosImage
+                {
+                    Extension = input.Image.FileName,
+                };
+
+                await this.imagesRepository.AddAsync(sosImage);
+                await this.imagesRepository.SaveChangesAsync();
+
                 using (FileStream fs = new FileStream(this.webHostEnvironment.WebRootPath + $"/SosImages/{input.Image.FileName}", FileMode.Create))
                 {
                     await input.Image.CopyToAsync(fs);

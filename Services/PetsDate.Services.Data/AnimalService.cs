@@ -1,5 +1,7 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using PetsDate.Data.Common.Repositories;
@@ -30,6 +32,26 @@
 
             await this.animalsRepository.AddAsync(animal);
             await this.animalsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 12)
+        {
+            return this.animalsRepository.AllAsNoTracking()
+                .OrderBy(x => x.Id)
+                .Skip(page * itemsPerPage).Take(itemsPerPage)
+                .Select(x => new AnimalListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Color = x.Color,
+                    Weight = x.Weight,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    ImageUrl = "/AnimalImages/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                }).ToList();
+            //// 1-12 - page 1  skip 0  (page - 1) * itemsPerPage
+            // 13-24 - page 2  skip 12
         }
     }
 }

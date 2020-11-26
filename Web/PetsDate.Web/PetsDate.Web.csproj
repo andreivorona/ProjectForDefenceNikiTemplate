@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Dashboard\" />
+    <Folder Include="wwwroot\AnimalImages\" />
     <Folder Include="wwwroot\SosImages\" />
   </ItemGroup>
 
