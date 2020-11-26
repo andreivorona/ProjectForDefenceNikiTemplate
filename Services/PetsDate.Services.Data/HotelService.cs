@@ -15,12 +15,14 @@
             this.hotelsRepository = hotelsRepository;
         }
 
-        public async Task CreateAsync(CreateHotelInputModel input)
+        public async Task CreateAsync(CreateHotelInputModel input, string userId)
         {
             var clinic = new Hotel
             {
+                UserId = userId,
                 Name = input.Name,
                 Location = input.Location,
+                Description = input.Description,
             };
 
             await this.hotelsRepository.AddAsync(clinic);

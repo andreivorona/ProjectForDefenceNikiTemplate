@@ -6,6 +6,6 @@
 
     public interface IHotelService
     {
-        Task CreateAsync(CreateHotelInputModel input);
+        Task CreateAsync(CreateHotelInputModel input, string userId);
     }
 }

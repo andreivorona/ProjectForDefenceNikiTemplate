@@ -3,17 +3,23 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.Hotel;
 
     public class HotelController : Controller
     {
         private readonly IHotelService hotelService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public HotelController(IHotelService hotelService)
+        public HotelController(
+            IHotelService hotelService,
+            UserManager<ApplicationUser> userManager)
         {
             this.hotelService = hotelService;
+            this.userManager = userManager;
         }
 
         [Authorize]
@@ -31,7 +37,9 @@
                 return this.View(input);
             }
 
-            await this.hotelService.CreateAsync(input);
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.hotelService.CreateAsync(input, user.Id);
 
             // todo return to Hotel info
             return this.Redirect("/");
