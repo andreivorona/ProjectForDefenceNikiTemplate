@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using PetsDate.Data.Common.Models;
 
     public class Image : BaseModel<string>
@@ -21,7 +22,7 @@
 
         public string Extension { get; set; }
 
-        // safe in file system
+        //// safe in file system
 
         public virtual ICollection<AnimalImage> Animals { get; set; } = new HashSet<AnimalImage>();
     }
