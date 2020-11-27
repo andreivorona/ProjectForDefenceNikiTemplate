@@ -5,6 +5,7 @@
     using PetsDate.Common;
     using PetsDate.Web.Controllers;
 
+    ////[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
     public class EditController : BaseController
     {

@@ -44,6 +44,8 @@
                 UserId = user.Id,
                 RoleId = role.Id,
             });
+
+            await dbContext.SaveChangesAsync();
         }
 
         private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, string userName, string email, string password)
