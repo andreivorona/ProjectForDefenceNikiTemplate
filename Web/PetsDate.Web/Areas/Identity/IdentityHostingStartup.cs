@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -9,13 +10,15 @@ using PetsDate.Data;
 using PetsDate.Data.Models;
 
 [assembly: HostingStartup(typeof(PetsDate.Web.Areas.Identity.IdentityHostingStartup))]
+
 namespace PetsDate.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
             });
         }
     }
