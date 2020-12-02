@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
     using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
     using PetsDate.Web.ViewModels.SosSignal;
@@ -11,12 +12,13 @@
     {
         private readonly IDeletableEntityRepository<SosSignal> sosSignalsRepository;
 
-        public SosSignalService(IDeletableEntityRepository<SosSignal> sosSignalsRepository)
+        public SosSignalService(
+            IDeletableEntityRepository<SosSignal> sosSignalsRepository)
         {
             this.sosSignalsRepository = sosSignalsRepository;
         }
 
-        public async Task CreateAsync(CreateSosSignalInputModel input, string userId)
+        public async Task CreateAsync(CreateSosSignalInputModel input, string userId, string imageUrl)
         {
             var sosSignal = new SosSignal
             {
@@ -24,6 +26,7 @@
                 Name = input.Name,
                 Location = input.Location,
                 Description = input.Description,
+                ImageUrl = imageUrl,
             };
 
             await this.sosSignalsRepository.AddAsync(sosSignal);

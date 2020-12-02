@@ -10,14 +10,13 @@
         public Clinic()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.ClinicImages = new HashSet<ClinicImage>();
         }
 
         public string Name { get; set; }
 
         public string Location { get; set; }
 
-        public ICollection<ClinicImage> ClinicImages { get; set; }
+        public string ImageUrl { get; set; }
 
         public string UserId { get; set; }
 

@@ -10,7 +10,6 @@
         public Hotel()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.HotelImages = new HashSet<HotelImage>();
         }
 
         public string Name { get; set; }
@@ -23,6 +22,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public ICollection<HotelImage> HotelImages { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

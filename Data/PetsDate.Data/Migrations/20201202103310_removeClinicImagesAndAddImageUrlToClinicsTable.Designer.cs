@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetsDate.Data;
 
 namespace PetsDate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202103310_removeClinicImagesAndAddImageUrlToClinicsTable")]
+    partial class removeClinicImagesAndAddImageUrlToClinicsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,9 +147,6 @@ namespace PetsDate.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -172,6 +171,21 @@ namespace PetsDate.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Animals");
+                });
+
+            modelBuilder.Entity("PetsDate.Data.Models.AnimalImage", b =>
+                {
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AnimalId", "ImageId");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("AnimalImages");
                 });
 
             modelBuilder.Entity("PetsDate.Data.Models.ApplicationRole", b =>
@@ -443,6 +457,35 @@ namespace PetsDate.Data.Migrations
                     b.ToTable("Hotels");
                 });
 
+            modelBuilder.Entity("PetsDate.Data.Models.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("PetsDate.Data.Models.Publication", b =>
                 {
                     b.Property<string>("Id")
@@ -584,6 +627,25 @@ namespace PetsDate.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PetsDate.Data.Models.AnimalImage", b =>
+                {
+                    b.HasOne("PetsDate.Data.Models.Animal", "Animal")
+                        .WithMany("Images")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PetsDate.Data.Models.Image", "Image")
+                        .WithMany("Animals")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Image");
+                });
+
             modelBuilder.Entity("PetsDate.Data.Models.Clinic", b =>
                 {
                     b.HasOne("PetsDate.Data.Models.ApplicationUser", "User")
@@ -611,6 +673,23 @@ namespace PetsDate.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PetsDate.Data.Models.Image", b =>
+                {
+                    b.HasOne("PetsDate.Data.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PetsDate.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PetsDate.Data.Models.Publication", b =>
                 {
                     b.HasOne("PetsDate.Data.Models.ApplicationUser", "User")
@@ -629,6 +708,11 @@ namespace PetsDate.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PetsDate.Data.Models.Animal", b =>
+                {
+                    b.Navigation("Images");
+                });
+
             modelBuilder.Entity("PetsDate.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -639,6 +723,11 @@ namespace PetsDate.Data.Migrations
                 });
 
             modelBuilder.Entity("PetsDate.Data.Models.Category", b =>
+                {
+                    b.Navigation("Animals");
+                });
+
+            modelBuilder.Entity("PetsDate.Data.Models.Image", b =>
                 {
                     b.Navigation("Animals");
                 });

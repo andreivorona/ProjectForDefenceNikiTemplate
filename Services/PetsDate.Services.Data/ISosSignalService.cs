@@ -6,6 +6,6 @@
 
     public interface ISosSignalService
     {
-        Task CreateAsync(CreateSosSignalInputModel input, string userId);
+        Task CreateAsync(CreateSosSignalInputModel input, string userId, string imageUrl);
     }
 }

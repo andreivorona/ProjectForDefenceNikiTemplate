@@ -28,11 +28,7 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Image> Images { get; set; }
-
         public DbSet<Clinic> Clinics { get; set; }
-
-        public DbSet<ClinicImage> ClinicImages { get; set; }
 
         public DbSet<Publication> Publications { get; set; }
 
@@ -40,13 +36,7 @@
 
         public DbSet<Hotel> Hotels { get; set; }
 
-        public DbSet<HotelImage> HotelImages { get; set; }
-
         public DbSet<SosSignal> SosSignals { get; set; }
-
-        public DbSet<SosImage> SosImages { get; set; }
-
-        public DbSet<AnimalImage> AnimalImages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -69,8 +59,6 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<AnimalImage>().HasKey(x => new { x.AnimalId, x.ImageId });
-
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

@@ -10,7 +10,6 @@
         public SosSignal()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.SosImages = new HashSet<SosImage>();
         }
 
         public string Name { get; set; }
@@ -23,6 +22,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<SosImage> SosImages { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

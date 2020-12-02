@@ -24,6 +24,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<AnimalImage> Images { get; set; } = new HashSet<AnimalImage>();
+        public string ImageUrl { get; set; }
     }
 }
