@@ -1,5 +1,7 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using PetsDate.Data.Common.Repositories;
@@ -25,6 +27,16 @@
 
             await this.publicationRepository.AddAsync(publication);
             await this.publicationRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<PublicationListAllViewModel> GetAll()
+        {
+            return this.publicationRepository.AllAsNoTracking()
+                .Select(x => new PublicationListAllViewModel
+                {
+                    Username = x.User.UserName,
+                    Description = x.Description,
+                }).ToList();
         }
     }
 }
