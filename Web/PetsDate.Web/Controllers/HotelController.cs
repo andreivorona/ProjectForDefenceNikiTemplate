@@ -1,7 +1,7 @@
 ﻿namespace PetsDate.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -13,13 +13,19 @@
     {
         private readonly IHotelService hotelService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly Cloudinary cloudinary;
+        private readonly ICloudinaryService cloudinaryService;
 
         public HotelController(
             IHotelService hotelService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            Cloudinary cloudinary,
+            ICloudinaryService cloudinaryService)
         {
             this.hotelService = hotelService;
             this.userManager = userManager;
+            this.cloudinary = cloudinary;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -37,12 +43,25 @@
                 return this.View(input);
             }
 
+            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
+
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.hotelService.CreateAsync(input, user.Id);
+            await this.hotelService.CreateAsync(input, user.Id, imageUrl);
 
             // todo return to Hotel info
-            return this.Redirect("/");
+            return this.Redirect("/Hotel/All");
+        }
+
+        [Authorize]
+        public IActionResult All()
+        {
+            var viewModel = new HotelListViewModel
+            {
+                Hotels = this.hotelService.GetAll(),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

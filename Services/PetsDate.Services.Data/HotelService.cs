@@ -1,5 +1,7 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using PetsDate.Data.Common.Repositories;
@@ -15,7 +17,7 @@
             this.hotelsRepository = hotelsRepository;
         }
 
-        public async Task CreateAsync(CreateHotelInputModel input, string userId)
+        public async Task CreateAsync(CreateHotelInputModel input, string userId, string imageUrl)
         {
             var clinic = new Hotel
             {
@@ -23,10 +25,23 @@
                 Name = input.Name,
                 Location = input.Location,
                 Description = input.Description,
+                ImageUrl = imageUrl,
             };
 
             await this.hotelsRepository.AddAsync(clinic);
             await this.hotelsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<HotelListAllViewModel> GetAll()
+        {
+            return this.hotelsRepository.AllAsNoTracking()
+                .Select(x => new HotelListAllViewModel
+                {
+                    Name = x.Name,
+                    Location = x.Location,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                }).ToList();
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model PetsDate.Web.ViewModels.Hotel.HotelListViewModel
+@{
+    this.ViewData["Title"] = "All Hotels";
+}
+
+<div class="text-center h1">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<div class="container row justify-content-xl-center">
+
+    @foreach (var hotel in this.Model.Hotels)
+    {
+        <div class="card col-md-3 mt-4 mr-4" style="width: 18rem;">
+            <img class="card-img-top" src="@hotel.ImageUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@hotel.Name</h5>
+
+                <p class="card-text">Location: @hotel.Location</p>
+
+                <p class="card-text">Description: @hotel.Description</p>
+
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    };
+</div>
+
