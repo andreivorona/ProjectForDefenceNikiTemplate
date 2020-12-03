@@ -7,7 +7,7 @@
 
     public interface IAnimalService
     {
-        Task CreateAsync(CreateAnimalInputModel input, string userId);
+        Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl);
 
         IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 12);
     }

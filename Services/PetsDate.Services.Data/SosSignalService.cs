@@ -1,6 +1,8 @@
 ﻿namespace PetsDate.Services.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -31,6 +33,18 @@
 
             await this.sosSignalsRepository.AddAsync(sosSignal);
             await this.sosSignalsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<SosSignalListAllViewModel> GetAll()
+        {
+            return this.sosSignalsRepository.AllAsNoTracking()
+                .Select(x => new SosSignalListAllViewModel
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                }).ToList();
         }
     }
 }

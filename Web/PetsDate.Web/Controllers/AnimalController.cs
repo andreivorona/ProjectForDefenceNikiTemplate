@@ -2,7 +2,7 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -15,15 +15,21 @@
         private readonly ICategoriesService categoriesService;
         private readonly IAnimalService animalService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly Cloudinary cloudinary;
+        private readonly ICloudinaryService cloudinaryService;
 
         public AnimalController(
             ICategoriesService categoriesService,
             IAnimalService animalService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            Cloudinary cloudinary,
+            ICloudinaryService cloudinaryService)
         {
             this.categoriesService = categoriesService;
             this.animalService = animalService;
             this.userManager = userManager;
+            this.cloudinary = cloudinary;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -46,12 +52,14 @@
                 return this.View(input);
             }
 
+            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
+
             var user = await this.userManager.GetUserAsync(this.User);
 
             ////var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value; info from cookie
 
             // create animal using service method
-            await this.animalService.CreateAsync(input, user.Id);
+            await this.animalService.CreateAsync(input, user.Id, imageUrl);
 
             // todo redirect to animal info page
             return this.Redirect("/Animal/All");

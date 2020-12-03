@@ -5,6 +5,7 @@
 
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -35,11 +36,13 @@
             this.cloudinaryService = cloudinaryService;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return this.View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateSosSignalInputModel input)
         {
@@ -55,7 +58,18 @@
             await this.sosSignalService.CreateAsync(input, user.Id, imageUrl);
 
             // todo return to Clinic info
-            return this.Redirect("/");
+            return this.Redirect("/SosSignal/All");
+        }
+
+        [Authorize]
+        public IActionResult All()
+        {
+            var viewModel = new SosSignalListViewModel
+            {
+                SosSignals = this.sosSignalService.GetAll(),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

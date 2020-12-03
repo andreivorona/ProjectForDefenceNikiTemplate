@@ -21,7 +21,7 @@
         [MinLength(2)]
         public string Location { get; set; }
 
-        [Display(Name = "Only Png and Jpg Images")]
+        [Required]
         public IFormFile Image { get; set; }
     }
 }

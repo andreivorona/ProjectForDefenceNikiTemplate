@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
+
     public class CreateAnimalInputModel
     {
         [MinLength(2)]
@@ -27,6 +29,9 @@
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
+
+        [Required]
+        public IFormFile Image { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
     }

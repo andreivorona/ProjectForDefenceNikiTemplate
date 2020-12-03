@@ -18,7 +18,7 @@
             this.animalsRepository = animalsRepository;
         }
 
-        public async Task CreateAsync(CreateAnimalInputModel input, string userId)
+        public async Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl)
         {
             var animal = new Animal
             {
@@ -28,6 +28,7 @@
                 Age = input.Age,
                 Color = input.Color,
                 Weight = input.Weight,
+                ImageUrl = imageUrl,
             };
 
             await this.animalsRepository.AddAsync(animal);
@@ -48,7 +49,7 @@
                     Weight = x.Weight,
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
-                    ImageUrl = "/AnimalImages/",
+                    ImageUrl = x.ImageUrl,
                 }).ToList();
             //// 1-12 - page 1  skip 0  (page - 1) * itemsPerPage
             // 13-24 - page 2  skip 12
