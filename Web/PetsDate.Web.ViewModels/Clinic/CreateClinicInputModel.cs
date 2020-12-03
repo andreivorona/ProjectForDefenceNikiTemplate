@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
+
     public class CreateClinicInputModel
     {
         [Required]
@@ -13,5 +15,8 @@
         [MinLength(1)]
         [Display(Name = "Location as text")]
         public string Location { get; set; }
+
+        [Required]
+        public IFormFile Image { get; set; }
     }
 }

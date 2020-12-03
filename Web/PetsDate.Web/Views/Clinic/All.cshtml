@@ -1,0 +1,26 @@
+﻿@model PetsDate.Web.ViewModels.Clinic.ClinicListViewModel
+@{
+    this.ViewData["Title"] = "All Clinics";
+}
+
+<div class="text-center h1">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<div class="container row justify-content-xl-center">
+
+    @foreach (var clinic in this.Model.Clinics)
+    {
+        <div class="card col-md-3 mt-4 mr-4" style="width: 18rem;">
+            <img class="card-img-top" src="@clinic.ImageUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@clinic.Name</h5>
+                
+                <p class="card-text">Color: @clinic.Location</p>
+
+
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    };
+</div>
