@@ -51,5 +51,16 @@
             // todo return to Clinic info
             return this.Redirect("/");
         }
+
+        [Authorize]
+        public IActionResult All()
+        {
+            var viewModel = new EventListViewModel
+            {
+                Events = this.eventService.GetAll(),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

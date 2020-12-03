@@ -1,5 +1,7 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using PetsDate.Data.Common.Repositories;
@@ -28,6 +30,19 @@
 
             await this.eventsRepository.AddAsync(eventItem);
             await this.eventsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<EventListAllViewModel> GetAll()
+        {
+            return this.eventsRepository.AllAsNoTracking()
+                .Select(x => new EventListAllViewModel
+                {
+                    Username = x.User.UserName,
+                    Name = x.Name,
+                    Location = x.Location,
+                    BeginEvent = x.BeginEvent,
+                    EndEvent = x.EndEvent,
+                }).ToList();
         }
     }
 }
