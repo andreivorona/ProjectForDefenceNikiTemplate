@@ -10,5 +10,7 @@
         Task CreateAsync(CreateEventInputModel input, string userId);
 
         IEnumerable<EventListAllViewModel> GetAll();
+
+        int GetCount();
     }
 }

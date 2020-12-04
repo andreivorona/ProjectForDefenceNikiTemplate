@@ -44,5 +44,10 @@
                     EndEvent = x.EndEvent,
                 }).ToList();
         }
+
+        public int GetCount()
+        {
+            return this.eventsRepository.All().Count();
+        }
     }
 }

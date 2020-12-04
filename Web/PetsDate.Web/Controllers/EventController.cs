@@ -53,11 +53,16 @@
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 6;
+
             var viewModel = new EventListViewModel
             {
                 Events = this.eventService.GetAll(),
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
+                ItemsCount = this.eventService.GetCount(),
             };
 
             return this.View(viewModel);

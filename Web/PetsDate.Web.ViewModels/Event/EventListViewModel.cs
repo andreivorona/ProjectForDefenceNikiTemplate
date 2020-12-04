@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class EventListViewModel
+    public class EventListViewModel : PagingViewModel
     {
         public IEnumerable<EventListAllViewModel> Events { get; set; }
     }
