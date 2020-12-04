@@ -10,5 +10,7 @@
         Task CreateAsync(CreateHotelInputModel input, string userId, string imageUrl);
 
         IEnumerable<HotelListAllViewModel> GetAll();
+
+        int GetCount();
     }
 }

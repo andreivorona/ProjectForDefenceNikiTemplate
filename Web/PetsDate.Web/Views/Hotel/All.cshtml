@@ -1,6 +1,6 @@
 ﻿@model PetsDate.Web.ViewModels.Hotel.HotelListViewModel
 @{
-    this.ViewData["Title"] = "All Hotels";
+    this.ViewData["Title"] = "All Hotels, page " + Model.PageNumber;
 }
 
 <div class="text-center h1">
@@ -25,4 +25,6 @@
         </div>
     };
 </div>
+
+<partial name="_PagingPartial" model="@Model" />
 

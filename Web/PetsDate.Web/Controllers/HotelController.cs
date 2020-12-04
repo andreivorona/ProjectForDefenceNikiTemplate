@@ -55,11 +55,16 @@
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 6;
+
             var viewModel = new HotelListViewModel
             {
                 Hotels = this.hotelService.GetAll(),
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
+                ItemsCount = this.hotelService.GetCount(),
             };
 
             return this.View(viewModel);

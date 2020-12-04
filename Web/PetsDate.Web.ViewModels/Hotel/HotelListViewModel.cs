@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class HotelListViewModel
+    public class HotelListViewModel : PagingViewModel
     {
         public IEnumerable<HotelListAllViewModel> Hotels { get; set; }
     }

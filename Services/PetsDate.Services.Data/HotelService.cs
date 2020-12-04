@@ -43,5 +43,10 @@
                     ImageUrl = x.ImageUrl,
                 }).ToList();
         }
+
+        public int GetCount()
+        {
+            return this.hotelsRepository.All().Count();
+        }
     }
 }
