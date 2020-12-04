@@ -64,6 +64,11 @@
         [Authorize]
         public IActionResult All(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
             const int itemPerPage = 6;
 
             var viewModel = new SosSignalListViewModel
