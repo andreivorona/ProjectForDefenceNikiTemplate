@@ -61,9 +61,9 @@
 
             var viewModel = new ClinicListViewModel
             {
+                Clinics = this.clinicService.GetAll(),
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
-                Clinics = this.clinicService.GetAll(),
                 ItemsCount = this.clinicService.GetCount(),
             };
 

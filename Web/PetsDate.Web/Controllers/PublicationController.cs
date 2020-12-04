@@ -46,11 +46,16 @@
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 6;
+
             var viewModel = new PublicationListViewModel
             {
                 Publications = this.publicationService.GetAll(),
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
+                ItemsCount = this.publicationService.GetCount(),
             };
 
             return this.View(viewModel);

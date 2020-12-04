@@ -38,5 +38,10 @@
                     Description = x.Description,
                 }).ToList();
         }
+
+        public int GetCount()
+        {
+            return this.publicationRepository.All().Count();
+        }
     }
 }

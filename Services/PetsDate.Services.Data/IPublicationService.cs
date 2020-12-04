@@ -10,5 +10,7 @@
         Task CreateAsync(CreatePublicationInputModel input, string userId);
 
         IEnumerable<PublicationListAllViewModel> GetAll();
+
+        int GetCount();
     }
 }
