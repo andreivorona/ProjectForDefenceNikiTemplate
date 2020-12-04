@@ -10,5 +10,7 @@
         Task CreateAsync(CreateClinicInputModel input, string userId, string imageUrl);
 
         IEnumerable<ClinicListAllViewModel> GetAll();
+
+        int GetCount();
     }
 }

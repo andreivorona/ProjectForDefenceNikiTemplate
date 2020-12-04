@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class ClinicListViewModel
+    public class ClinicListViewModel : PagingViewModel
     {
         public IEnumerable<ClinicListAllViewModel> Clinics { get; set; }
     }

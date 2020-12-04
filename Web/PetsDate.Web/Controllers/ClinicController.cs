@@ -55,11 +55,16 @@
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 6;
+
             var viewModel = new ClinicListViewModel
             {
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
                 Clinics = this.clinicService.GetAll(),
+                ItemsCount = this.clinicService.GetCount(),
             };
 
             return this.View(viewModel);

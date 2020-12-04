@@ -41,5 +41,10 @@
                     ImageUrl = x.ImageUrl,
                 }).ToList();
         }
+
+        public int GetCount()
+        {
+            return this.clinicsRepository.All().Count();
+        }
     }
 }
