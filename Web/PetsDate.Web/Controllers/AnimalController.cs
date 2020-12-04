@@ -70,14 +70,14 @@
         [Authorize]
         public IActionResult All(int id = 1)
         {
-            const int itemPerPage = 12;
+            const int itemPerPage = 6;
 
             var viewModel = new AnimalListViewModel
             {
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
                 Animals = this.animalService.GetAll(id, itemPerPage),
-                AnimalsCount = this.animalService.GetCount(),
+                ItemsCount = this.animalService.GetCount(),
             };
 
             return this.View(viewModel);

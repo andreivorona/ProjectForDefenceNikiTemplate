@@ -35,7 +35,7 @@
             await this.animalsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 12)
+        public IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 6)
         {
             return this.animalsRepository.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
