@@ -10,5 +10,7 @@
         Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl);
 
         IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 12);
+
+        int GetCount();
     }
 }

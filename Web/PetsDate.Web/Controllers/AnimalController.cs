@@ -66,13 +66,18 @@
             return this.Redirect("/Animal/All");
         }
 
+        // Animal/All/8
         [Authorize]
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 12;
+
             var viewModel = new AnimalListViewModel
             {
+                ItemPerPage = itemPerPage,
                 PageNumber = id,
-                Animals = this.animalService.GetAll(id),
+                Animals = this.animalService.GetAll(id, itemPerPage),
+                AnimalsCount = this.animalService.GetCount(),
             };
 
             return this.View(viewModel);

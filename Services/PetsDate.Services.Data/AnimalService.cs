@@ -38,8 +38,9 @@
         public IEnumerable<AnimalListAllViewModel> GetAll(int page, int itemsPerPage = 12)
         {
             return this.animalsRepository.AllAsNoTracking()
-                .OrderBy(x => x.Id)
-                .Skip(page * itemsPerPage).Take(itemsPerPage)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(x => new AnimalListAllViewModel
                 {
                     Id = x.Id,
@@ -53,6 +54,11 @@
                 }).ToList();
             //// 1-12 - page 1  skip 0  (page - 1) * itemsPerPage
             // 13-24 - page 2  skip 12
+        }
+
+        public int GetCount()
+        {
+            return this.animalsRepository.All().Count();
         }
     }
 }
