@@ -46,5 +46,10 @@
                     ImageUrl = x.ImageUrl,
                 }).ToList();
         }
+
+        public int GetCount()
+        {
+            return this.sosSignalsRepository.All().Count();
+        }
     }
 }

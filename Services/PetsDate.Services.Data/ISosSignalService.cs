@@ -10,5 +10,7 @@
         Task CreateAsync(CreateSosSignalInputModel input, string userId, string imageUrl);
 
         IEnumerable<SosSignalListAllViewModel> GetAll();
+
+        int GetCount();
     }
 }

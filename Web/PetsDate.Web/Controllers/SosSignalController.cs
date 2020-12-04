@@ -62,11 +62,16 @@
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            const int itemPerPage = 6;
+
             var viewModel = new SosSignalListViewModel
             {
                 SosSignals = this.sosSignalService.GetAll(),
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
+                ItemsCount = this.sosSignalService.GetCount(),
             };
 
             return this.View(viewModel);

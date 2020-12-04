@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class SosSignalListViewModel
+    public class SosSignalListViewModel : PagingViewModel
     {
         public IEnumerable<SosSignalListAllViewModel> SosSignals { get; set; }
     }

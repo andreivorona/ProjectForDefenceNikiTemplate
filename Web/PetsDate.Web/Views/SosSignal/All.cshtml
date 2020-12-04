@@ -1,6 +1,6 @@
 ﻿@model PetsDate.Web.ViewModels.SosSignal.SosSignalListViewModel
 @{
-    this.ViewData["Title"] = "All SosSignals";
+    this.ViewData["Title"] = "All SosSignals, page " + Model.PageNumber;
 }
 
 <div class="text-center h1">
@@ -24,3 +24,5 @@
         </div>
     };
 </div>
+
+<partial name="_PagingPartial" model="@Model" />
