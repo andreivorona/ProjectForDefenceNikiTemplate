@@ -68,7 +68,7 @@
 
         // Animal/All/8
         [Authorize]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)
             {
@@ -77,11 +77,13 @@
 
             const int itemPerPage = 6;
 
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new AnimalListViewModel
             {
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
-                Animals = this.animalService.GetAll(id, itemPerPage),
+                Animals = this.animalService.GetAll(id, user.Id, itemPerPage),
                 ItemsCount = this.animalService.GetCount(),
             };
 
