@@ -1,6 +1,7 @@
 ﻿namespace PetsDate.Data.Seeding
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,25 +11,26 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            List<string> categories = new List<string>();
+            categories.Add("Fishes");
+            categories.Add("Rodents");
+            categories.Add("Amphibians");
+            categories.Add("Reptiles");
+            categories.Add("Birds");
+            categories.Add("Mammals");
+
             if (dbContext.Categories.Any())
             {
                 return;
             }
 
-            await dbContext.Categories.AddAsync(new Category
+            foreach (var category in categories)
             {
-                Name = "Dog",
-            });
-
-            await dbContext.Categories.AddAsync(new Category
-            {
-                Name = "Cat",
-            });
-
-            await dbContext.Categories.AddAsync(new Category
-            {
-                Name = "Other",
-            });
+                await dbContext.Categories.AddAsync(new Category
+                {
+                    Name = category,
+                });
+            }
 
             await dbContext.SaveChangesAsync();
         }
