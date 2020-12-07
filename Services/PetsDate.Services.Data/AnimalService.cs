@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Identity;
     using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
@@ -12,15 +12,24 @@
 
     public class AnimalService : IAnimalService
     {
+        private readonly IRepository<AnimalImage> animalImagesRepository;
         private readonly IDeletableEntityRepository<Animal> animalsRepository;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly Cloudinary cloudinary;
+        private readonly ICloudinaryService cloudinaryService;
 
         public AnimalService(
+            IRepository<AnimalImage> animalImagesRepository,
             IDeletableEntityRepository<Animal> animalsRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            Cloudinary cloudinary,
+            ICloudinaryService cloudinaryService)
         {
+            this.animalImagesRepository = animalImagesRepository;
             this.animalsRepository = animalsRepository;
             this.userManager = userManager;
+            this.cloudinary = cloudinary;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public async Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl)
@@ -38,6 +47,25 @@
 
             await this.animalsRepository.AddAsync(animal);
             await this.animalsRepository.SaveChangesAsync();
+        }
+
+        public async Task CreateAnimalImageAsync(AddImagesInputModel input, string userId, int animalId)
+        {
+            foreach (var image in input.Images)
+            {
+                var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, image);
+
+                var tempImage = new AnimalImage
+                {
+                    UserId = userId,
+                    AnimalId = animalId,
+                    ImageUrl = imageUrl,
+                };
+
+                await this.animalImagesRepository.AddAsync(tempImage);
+            }
+
+            await this.animalImagesRepository.SaveChangesAsync();
         }
 
         public IEnumerable<AnimalListAllViewModel> GetAll(int page, string userId, int itemsPerPage = 6)

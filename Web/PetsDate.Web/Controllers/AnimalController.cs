@@ -89,5 +89,27 @@
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult AddImages(int id)
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddImages(AddImagesInputModel input, int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.animalService.CreateAnimalImageAsync(input, user.Id, id);
+
+            return this.Redirect("/Animal/All");
+        }
     }
 }

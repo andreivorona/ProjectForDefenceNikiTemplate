@@ -1,0 +1,21 @@
+﻿@model PetsDate.Web.ViewModels.Animal.AddImagesInputModel
+@{
+    this.ViewData["Title"] = "Add new Collection Images";
+}
+
+<div class="text-center">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
+
+    <section class="form-group">
+        <label asp-for="Images"></label>
+
+        <input asp-for="Images" class="form-control" />
+
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </section>
+
+    <input type="submit" class="btn btn-primary" />
+</form>
