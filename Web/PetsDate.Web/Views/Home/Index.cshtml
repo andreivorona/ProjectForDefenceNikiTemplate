@@ -6,6 +6,25 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+
+    <div class="container row justify-content-xl-center">
+
+        @foreach (var user in this.Model.Users)
+        {
+            <div class="card col-md-3 mt-4 mr-4" style="width: 18rem;">
+                
+                <div class="card-body">
+                    <h5 class="card-title">@user.UserName</h5>
+                    <p class="card-text">Email: @user.Email</p>
+                    @if (user.PhoneNumber != null)
+                    {
+                        <p class="card-text">Color: @user.PhoneNumber</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
     <p>We have:</p>
     <ul>
         <li>

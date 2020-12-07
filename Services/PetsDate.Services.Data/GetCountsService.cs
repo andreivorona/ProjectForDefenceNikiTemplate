@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using PetsDate.Data.Common.Repositories;
@@ -52,6 +53,18 @@
             };
 
             return data;
+        }
+
+        public IEnumerable<ApplicationUser> GetAll()
+        {
+            return this.userRepository.AllAsNoTracking()
+                .Where(x => x.Roles.Count == 0)
+                .Select(x => new ApplicationUser
+                {
+                     UserName = x.UserName,
+                     Email = x.Email,
+                     PhoneNumber = x.PhoneNumber,
+                }).ToList();
         }
     }
 }

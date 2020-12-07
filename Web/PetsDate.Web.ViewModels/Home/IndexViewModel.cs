@@ -1,4 +1,7 @@
-﻿namespace PetsDate.Web.ViewModels.Home
+﻿using PetsDate.Data.Models;
+using System.Collections.Generic;
+
+namespace PetsDate.Web.ViewModels.Home
 {
     public class IndexViewModel
     {
@@ -17,5 +20,7 @@
         public int SosSignslsCount { get; set; }
 
         public int CategoriesCount { get; set; }
+
+        public ICollection<ApplicationUser> Users { get; set; } = new HashSet<ApplicationUser>();
     }
 }

@@ -23,6 +23,7 @@
         public IActionResult Index()
         {
             var viewModel = this.countsService.GetCounts();
+            viewModel.Users = this.countsService.GetAll().ToList();
 
             return this.View(viewModel);
         }
