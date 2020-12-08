@@ -32,8 +32,10 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl)
+        public async Task CreateAsync(CreateAnimalInputModel input, string userId)
         {
+            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
+
             var animal = new Animal
             {
                 UserId = userId,

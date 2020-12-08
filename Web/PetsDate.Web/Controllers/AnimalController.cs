@@ -16,8 +16,6 @@
         private readonly ICategoriesService categoriesService;
         private readonly IAnimalService animalService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly Cloudinary cloudinary;
-        private readonly ICloudinaryService cloudinaryService;
 
         public AnimalController(
             ICategoriesService categoriesService,
@@ -29,8 +27,6 @@
             this.categoriesService = categoriesService;
             this.animalService = animalService;
             this.userManager = userManager;
-            this.cloudinary = cloudinary;
-            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -53,14 +49,12 @@
                 return this.View(input);
             }
 
-            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
-
             var user = await this.userManager.GetUserAsync(this.User);
 
             ////var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value; info from cookie
 
             // create animal using service method
-            await this.animalService.CreateAsync(input, user.Id, imageUrl);
+            await this.animalService.CreateAsync(input, user.Id);
 
             // todo redirect to animal info page
             return this.Redirect("/Animal/All");
@@ -117,13 +111,8 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            const int itemPerPage = 6;
-
             var viewModel = new AnimalListViewModel
             {
-                ItemPerPage = itemPerPage,
-                PageNumber = id,
-                ItemsCount = this.animalService.GetImagesCount(),
                 AnimalImages = this.animalService.GetAnimalImages(user.Id, id),
             };
 

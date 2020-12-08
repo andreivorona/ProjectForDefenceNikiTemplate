@@ -7,7 +7,7 @@
 
     public interface IAnimalService
     {
-        Task CreateAsync(CreateAnimalInputModel input, string userId, string imageUrl);
+        Task CreateAsync(CreateAnimalInputModel input, string userId);
 
         Task CreateAnimalImageAsync(AddImagesInputModel input, string userId, int animalId);
 

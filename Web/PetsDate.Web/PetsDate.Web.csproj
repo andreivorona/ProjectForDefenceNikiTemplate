@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\AnimalImages\**" />
+    <Content Remove="wwwroot\AnimalImages\**" />
+    <EmbeddedResource Remove="wwwroot\AnimalImages\**" />
+    <None Remove="wwwroot\AnimalImages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Event\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -54,8 +61,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Dashboard\" />
-    <Folder Include="wwwroot\AnimalImages\" />
-    <Folder Include="wwwroot\SosImages\" />
   </ItemGroup>
 
   <ItemGroup>
