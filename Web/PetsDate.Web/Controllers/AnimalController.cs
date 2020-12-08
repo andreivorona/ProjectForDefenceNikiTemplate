@@ -111,5 +111,23 @@
 
             return this.Redirect("/Animal/All");
         }
+
+        [Authorize]
+        public async Task<IActionResult> ImagesCollection(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            const int itemPerPage = 6;
+
+            var viewModel = new AnimalListViewModel
+            {
+                ItemPerPage = itemPerPage,
+                PageNumber = id,
+                ItemsCount = this.animalService.GetImagesCount(),
+                AnimalImages = this.animalService.GetAnimalImages(user.Id, id),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

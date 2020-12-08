@@ -90,9 +90,24 @@
             // 13-24 - page 2  skip 12
         }
 
+        public int GetImagesCount()
+        {
+            return this.animalImagesRepository.All().Count();
+        }
+
         public int GetCount()
         {
             return this.animalsRepository.All().Count();
+        }
+
+        public IEnumerable<AnimalImageListAllViewModel> GetAnimalImages(string userId, int animalId)
+        {
+            return this.animalImagesRepository.AllAsNoTracking()
+                .Where(x => x.UserId == userId && x.AnimalId == animalId)
+                .Select(x => new AnimalImageListAllViewModel
+                {
+                   ImageUrl = x.ImageUrl,
+                }).ToList();
         }
     }
 }

@@ -13,6 +13,10 @@
 
         IEnumerable<AnimalListAllViewModel> GetAll(int page, string userId, int itemsPerPage = 12);
 
+        IEnumerable<AnimalImageListAllViewModel> GetAnimalImages(string userId, int animalId);
+
         int GetCount();
+
+        int GetImagesCount();
     }
 }

@@ -11,7 +11,7 @@
 
     @foreach (var animal in this.Model.Animals)
     {
-        <div class="card col-md-3 mt-4 mr-4" style="width: 18rem;">
+        <div class="card col-md-3 mt-4 mr-4" style="width: 18rem">
             <img class="card-img-top" src="@animal.ImageUrl" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@animal.Name</h5>
@@ -22,7 +22,10 @@
                 <p class="card-text">AnimalId: @animal.Id</p>
 
 
-                <a class="btn btn-primary" asp-area="" asp-controller="Animal" asp-action="AddImages" asp-route-id="@animal.Id">Image Collections</a>
+                <a class="btn btn-primary" asp-area="" asp-controller="Animal" asp-action="AddImages" asp-route-id="@animal.Id">Add Images</a>
+
+                <a class="btn btn-primary" asp-area="" asp-controller="Animal" asp-action="ImagesCollection" asp-route-id="@animal.Id">Collection of Images</a>
+
             </div>
         </div>
     }
