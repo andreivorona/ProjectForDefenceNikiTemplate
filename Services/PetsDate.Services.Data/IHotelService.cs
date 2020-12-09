@@ -7,9 +7,9 @@
 
     public interface IHotelService
     {
-        Task CreateAsync(CreateHotelInputModel input, string userId, string imageUrl);
+        Task CreateAsync(CreateHotelInputModel input, string userId);
 
-        IEnumerable<HotelListAllViewModel> GetAll();
+        IEnumerable<HotelListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
         int GetCount();
     }

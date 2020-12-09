@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -14,19 +13,13 @@
     {
         private readonly IHotelService hotelService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly Cloudinary cloudinary;
-        private readonly ICloudinaryService cloudinaryService;
 
         public HotelController(
             IHotelService hotelService,
-            UserManager<ApplicationUser> userManager,
-            Cloudinary cloudinary,
-            ICloudinaryService cloudinaryService)
+            UserManager<ApplicationUser> userManager)
         {
             this.hotelService = hotelService;
             this.userManager = userManager;
-            this.cloudinary = cloudinary;
-            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -44,18 +37,16 @@
                 return this.View(input);
             }
 
-            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
-
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.hotelService.CreateAsync(input, user.Id, imageUrl);
+            await this.hotelService.CreateAsync(input, user.Id);
 
             // todo return to Hotel info
             return this.Redirect("/Hotel/All");
         }
 
         [Authorize]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)
             {
@@ -64,9 +55,11 @@
 
             const int itemPerPage = 6;
 
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new HotelListViewModel
             {
-                Hotels = this.hotelService.GetAll(),
+                Hotels = this.hotelService.GetAll(id, user.Id, itemPerPage),
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
                 ItemsCount = this.hotelService.GetCount(),
