@@ -14,19 +14,13 @@
     {
         private readonly IClinicService clinicService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly Cloudinary cloudinary;
-        private readonly ICloudinaryService cloudinaryService;
 
         public ClinicController(
             IClinicService clinicService,
-            UserManager<ApplicationUser> userManager,
-            Cloudinary cloudinary,
-            ICloudinaryService cloudinaryService)
+            UserManager<ApplicationUser> userManager)
         {
             this.clinicService = clinicService;
             this.userManager = userManager;
-            this.cloudinary = cloudinary;
-            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -44,18 +38,16 @@
                 return this.View(input);
             }
 
-            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
-
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.clinicService.CreateAsync(input, user.Id, imageUrl);
+            await this.clinicService.CreateAsync(input, user.Id);
 
             // todo return to Clinic info
             return this.Redirect("/Clinic/All");
         }
 
         [Authorize]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)
             {
@@ -64,9 +56,11 @@
 
             const int itemPerPage = 6;
 
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new ClinicListViewModel
             {
-                Clinics = this.clinicService.GetAll(),
+                Clinics = this.clinicService.GetAll(id, user.Id, itemPerPage),
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
                 ItemsCount = this.clinicService.GetCount(),

@@ -7,9 +7,9 @@
 
     public interface IClinicService
     {
-        Task CreateAsync(CreateClinicInputModel input, string userId, string imageUrl);
+        Task CreateAsync(CreateClinicInputModel input, string userId);
 
-        IEnumerable<ClinicListAllViewModel> GetAll();
+        IEnumerable<ClinicListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
         int GetCount();
     }
