@@ -13,15 +13,23 @@
     public class SosSignalService : ISosSignalService
     {
         private readonly IDeletableEntityRepository<SosSignal> sosSignalsRepository;
+        private readonly Cloudinary cloudinary;
+        private readonly ICloudinaryService cloudinaryService;
 
         public SosSignalService(
-            IDeletableEntityRepository<SosSignal> sosSignalsRepository)
+            IDeletableEntityRepository<SosSignal> sosSignalsRepository,
+            Cloudinary cloudinary,
+            ICloudinaryService cloudinaryService)
         {
             this.sosSignalsRepository = sosSignalsRepository;
+            this.cloudinary = cloudinary;
+            this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task CreateAsync(CreateSosSignalInputModel input, string userId, string imageUrl)
+        public async Task CreateAsync(CreateSosSignalInputModel input, string userId)
         {
+            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
+
             var sosSignal = new SosSignal
             {
                 UserId = userId,
@@ -35,9 +43,13 @@
             await this.sosSignalsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<SosSignalListAllViewModel> GetAll()
+        public IEnumerable<SosSignalListAllViewModel> GetAll(int page, string userId, int itemsPerPage)
         {
             return this.sosSignalsRepository.AllAsNoTracking()
+                .Where(x => x.User.Id == userId)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(x => new SosSignalListAllViewModel
                 {
                     Name = x.Name,

@@ -1,15 +1,12 @@
 ﻿namespace PetsDate.Web.Controllers
 {
-    using System.IO;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels.SosSignal;
@@ -19,21 +16,15 @@
         private readonly ISosSignalService sosSignalService;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly Cloudinary cloudinary;
-        private readonly ICloudinaryService cloudinaryService;
 
         public SosSignalController(
             ISosSignalService sosSignalService,
             IWebHostEnvironment webHostEnvironment,
-            UserManager<ApplicationUser> userManager,
-            Cloudinary cloudinary,
-            ICloudinaryService cloudinaryService)
+            UserManager<ApplicationUser> userManager)
         {
             this.sosSignalService = sosSignalService;
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
-            this.cloudinary = cloudinary;
-            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -51,18 +42,16 @@
                 return this.View(input);
             }
 
-            var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
-
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.sosSignalService.CreateAsync(input, user.Id, imageUrl);
+            await this.sosSignalService.CreateAsync(input, user.Id);
 
             // todo return to Clinic info
             return this.Redirect("/SosSignal/All");
         }
 
         [Authorize]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)
             {
@@ -71,9 +60,11 @@
 
             const int itemPerPage = 6;
 
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new SosSignalListViewModel
             {
-                SosSignals = this.sosSignalService.GetAll(),
+                SosSignals = this.sosSignalService.GetAll(id, user.Id, itemPerPage),
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
                 ItemsCount = this.sosSignalService.GetCount(),

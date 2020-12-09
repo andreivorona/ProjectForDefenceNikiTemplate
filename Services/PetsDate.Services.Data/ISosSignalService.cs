@@ -7,9 +7,9 @@
 
     public interface ISosSignalService
     {
-        Task CreateAsync(CreateSosSignalInputModel input, string userId, string imageUrl);
+        Task CreateAsync(CreateSosSignalInputModel input, string userId);
 
-        IEnumerable<SosSignalListAllViewModel> GetAll();
+        IEnumerable<SosSignalListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
         int GetCount();
     }
