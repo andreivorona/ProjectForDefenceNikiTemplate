@@ -9,7 +9,7 @@
     {
         Task CreateAsync(CreatePublicationInputModel input, string userId);
 
-        IEnumerable<PublicationListAllViewModel> GetAll();
+        IEnumerable<PublicationListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
         int GetCount();
     }

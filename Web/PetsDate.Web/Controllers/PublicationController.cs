@@ -46,7 +46,7 @@
         }
 
         [Authorize]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)
             {
@@ -55,9 +55,11 @@
 
             const int itemPerPage = 6;
 
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new PublicationListViewModel
             {
-                Publications = this.publicationService.GetAll(),
+                Publications = this.publicationService.GetAll(id, user.Id, itemPerPage),
                 ItemPerPage = itemPerPage,
                 PageNumber = id,
                 ItemsCount = this.publicationService.GetCount(),

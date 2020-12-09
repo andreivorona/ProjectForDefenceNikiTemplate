@@ -29,9 +29,13 @@
             await this.publicationRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<PublicationListAllViewModel> GetAll()
+        public IEnumerable<PublicationListAllViewModel> GetAll(int page, string userId, int itemsPerPage)
         {
             return this.publicationRepository.AllAsNoTracking()
+                .Where(x => x.User.Id == userId)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(x => new PublicationListAllViewModel
                 {
                     Username = x.User.UserName,
