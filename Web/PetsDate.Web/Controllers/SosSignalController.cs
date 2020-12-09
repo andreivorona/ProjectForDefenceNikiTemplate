@@ -1,8 +1,8 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
-    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -44,7 +44,15 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.sosSignalService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.sosSignalService.CreateAsync(input, user.Id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
 
             // todo return to Clinic info
             return this.Redirect("/SosSignal/All");
