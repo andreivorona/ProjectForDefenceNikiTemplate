@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -54,7 +55,15 @@
             ////var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value; info from cookie
 
             // create animal using service method
-            await this.animalService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.animalService.CreateAsync(input, user.Id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
 
             // todo redirect to animal info page
             return this.Redirect("/Animal/All");
@@ -101,7 +110,15 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.animalService.CreateAnimalImageAsync(input, user.Id, id);
+            try
+            {
+                await this.animalService.CreateAnimalImageAsync(input, user.Id, id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
 
             return this.Redirect("/Animal/All");
         }

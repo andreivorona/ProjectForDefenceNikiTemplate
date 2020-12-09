@@ -1,6 +1,8 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@
 
     public class AnimalService : IAnimalService
     {
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IRepository<AnimalImage> animalImagesRepository;
         private readonly IDeletableEntityRepository<Animal> animalsRepository;
         private readonly UserManager<ApplicationUser> userManager;
@@ -34,6 +37,13 @@
 
         public async Task CreateAsync(CreateAnimalInputModel input, string userId)
         {
+            var extension = Path.GetExtension(input.Image.FileName);
+
+            if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+            {
+                throw new Exception($"Invalid image extension {extension}");
+            }
+
             var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
 
             var animal = new Animal
@@ -55,6 +65,13 @@
         {
             foreach (var image in input.Images)
             {
+                var extension = Path.GetExtension(image.FileName);
+
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"Invalid image extension {extension}");
+                }
+
                 var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, image);
 
                 var tempImage = new AnimalImage
