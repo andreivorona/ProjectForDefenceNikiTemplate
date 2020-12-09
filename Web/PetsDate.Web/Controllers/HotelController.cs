@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -39,7 +40,15 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.hotelService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.hotelService.CreateAsync(input, user.Id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
 
             // todo return to Hotel info
             return this.Redirect("/Hotel/All");
