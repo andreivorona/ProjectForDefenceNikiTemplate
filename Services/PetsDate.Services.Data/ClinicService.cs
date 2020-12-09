@@ -1,6 +1,8 @@
 ﻿namespace PetsDate.Services.Data
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -11,6 +13,7 @@
 
     public class ClinicService : IClinicService
     {
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Clinic> clinicsRepository;
         private readonly Cloudinary cloudinary;
         private readonly ICloudinaryService cloudinaryService;
@@ -27,6 +30,13 @@
 
         public async Task CreateAsync(CreateClinicInputModel input, string userId)
         {
+            var extension = Path.GetExtension(input.Image.FileName);
+
+            if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+            {
+                throw new Exception($"Invalid image extension {extension}");
+            }
+
             var imageUrl = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Image);
 
             var clinic = new Clinic

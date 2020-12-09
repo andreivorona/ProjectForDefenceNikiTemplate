@@ -1,5 +1,6 @@
 ﻿namespace PetsDate.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -40,7 +41,15 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.clinicService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.clinicService.CreateAsync(input, user.Id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
 
             // todo return to Clinic info
             return this.Redirect("/Clinic/All");
