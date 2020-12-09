@@ -32,9 +32,13 @@
             await this.eventsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<EventListAllViewModel> GetAll()
+        public IEnumerable<EventListAllViewModel> GetAll(int page, string userId, int itemsPerPage)
         {
             return this.eventsRepository.AllAsNoTracking()
+                .Where(x => x.User.Id == userId)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(x => new EventListAllViewModel
                 {
                     Username = x.User.UserName,
