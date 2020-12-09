@@ -2,7 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using PetsDate.Data;
     using PetsDate.Data.Common.Repositories;
@@ -26,6 +26,12 @@
             viewModel.Users = this.countsService.GetAll().ToList();
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult Chat()
+        {
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

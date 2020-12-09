@@ -20,6 +20,7 @@
     using PetsDate.Services.Data;
     using PetsDate.Services.Mapping;
     using PetsDate.Services.Messaging;
+    using PetsDate.Web.Hubs;
     using PetsDate.Web.ViewModels;
 
     public class Startup
@@ -52,6 +53,9 @@
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+
+            services.AddSignalR();
+
             services.AddRazorPages();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -123,6 +127,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

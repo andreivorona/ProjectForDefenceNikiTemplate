@@ -1,10 +1,8 @@
 ﻿namespace PetsDate.Web.Controllers
 {
     using System;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -21,9 +19,7 @@
         public AnimalController(
             ICategoriesService categoriesService,
             IAnimalService animalService,
-            UserManager<ApplicationUser> userManager,
-            Cloudinary cloudinary,
-            ICloudinaryService cloudinaryService)
+            UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.animalService = animalService;
