@@ -62,14 +62,14 @@
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
-        <a asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>
     }
 
     <hr />
 
     @if (this.User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Home" asp-action="Chat">chat page</a>
+        <a class="btn btn-info" asp-controller="Home" asp-action="Chat">chat page</a>
     }
 
 </div>
