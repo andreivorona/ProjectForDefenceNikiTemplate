@@ -1,6 +1,8 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -38,6 +40,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
+    font-family: 'Langar', cursive;
     margin-bottom: 60px;
     background: radial-gradient(circle, rgba(63,222,251,1) 14%, rgba(90,170,226,1) 28%, rgba(84,192,111,0.2077964975052521) 53%, rgba(70,220,252,0.5271242285976891) 100%);
 }
@@ -108,4 +111,11 @@ a {
 
 .form-control {
     padding: 3px 0;
+}
+
+h1 {
+    font-family: 'Langar', cursive;
+    color: rgba(67,101,146,1);
+    font-size: 3.5rem;
+    font-weight: 300;
 }
