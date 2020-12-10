@@ -11,14 +11,14 @@
 
         @foreach (var user in this.Model.Users)
         {
-            <div class="card col-md-3 mt-4 mr-4" style="width: 18rem;">
+            <div class="card col-md-3 mt-4 mr-4 p-3 mb-2 bg-success text-white" style="width: 18rem;">
 
                 <div class="card-body">
                     <h5 class="card-title">@user.UserName</h5>
                     <p class="card-text">Email: @user.Email</p>
                     @if (user.PhoneNumber != null)
                     {
-                        <p class="card-text">Color: @user.PhoneNumber</p>
+                        <p class="card-text">Phone number: @user.PhoneNumber</p>
                     }
                 </div>
             </div>
