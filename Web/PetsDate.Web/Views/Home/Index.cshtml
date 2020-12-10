@@ -25,44 +25,51 @@
         }
     </div>
 
-    <p>We have:</p>
-    <ul>
-        <li>
+    <h2>We have:</h2>
+    <ul class="list-group">
+        <li class="list-group-item">
             Users: @Model.UsersCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Animals: @Model.AnimalsCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Clinics: @Model.ClinicCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Publications: @Model.PublicationCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Events: @Model.EventsCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Hotels: @Model.HoteslCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Sos Signals: @Model.SosSignslsCount
         </li>
 
-        <li>
+        <li class="list-group-item">
             Categories: @Model.CategoriesCount
         </li>
     </ul>
 
-    <a asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
+        <a asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>
+    }
 
     <hr />
 
-    <a asp-controller="Home" asp-action="Chat">chat page</a>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Home" asp-action="Chat">chat page</a>
+    }
+
 </div>
