@@ -1,0 +1,28 @@
+﻿@model PetsDate.Web.ViewModels.Animal.AnimalListAllViewModel
+
+@{
+    this.ViewData["Title"] = "Animal Info Page";
+}
+
+<div class="text-center h1">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<div class="container">
+
+    <div class="card col-md-3 mt-4 mr-4" style="width: 18rem">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">Age: @Model.Age</p>
+            <p class="card-text">Color: @Model.Color</p>
+            <p class="card-text">Weight: @Model.Weight</p>
+            <p class="card-text">Category: @Model.CategoryName</p>
+            <p class="card-text">AnimalId: @Model.Id</p>
+
+            <a class="btn btn-primary mb-2" asp-area="" asp-controller="Animal" asp-action="All">Return</a>
+
+        </div>
+    </div>
+
+</div>

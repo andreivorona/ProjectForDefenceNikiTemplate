@@ -41,8 +41,7 @@
 
             await this.publicationService.CreateAsync(input, user.Id);
 
-            // todo return to Clinic info
-            return this.Redirect("/");
+            return this.Redirect("/Publication/All");
         }
 
         [Authorize]

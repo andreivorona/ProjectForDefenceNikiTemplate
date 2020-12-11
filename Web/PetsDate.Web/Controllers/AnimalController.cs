@@ -131,5 +131,14 @@
 
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Info(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var viewModel = this.animalService.GetInfo(user.Id, id);
+
+            return this.View(viewModel);
+        }
     }
 }

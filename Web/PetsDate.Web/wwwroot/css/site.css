@@ -74,20 +74,28 @@ body {
 }
 
 @media (min-width: 1200px) {
+    
     .card-img-top {
-        width: 230px;
-        height: 150px;
+        width: 100%;
+        height: 180px;
         transition: width 2.5s, height 2.5s;
     }
 
-
     .card-img-top:hover {
-        width: 240px;
+        width: 100%;
         height: 250px;
     }
 }
 
+.container {
+    padding: 0;
+    margin: 0 auto;
+}
+
 .card {
+    margin: 15px;
+    padding: 0;
+    width: 18rem;
     background: linear-gradient(90deg, rgba(124,142,165,1) 22%, rgba(67,101,146,1) 67%);
     border-radius: 5px;
     -webkit-box-shadow: 5px 5px 15px -4px #000000;
@@ -110,12 +118,17 @@ a {
 }
 
 .form-control {
-    padding: 3px 0;
+    padding: 6px 0;   
+    text-align: center;
 }
 
-h1 {
+ h1 {
     font-family: 'Langar', cursive;
     color: rgba(67,101,146,1);
     font-size: 3.5rem;
     font-weight: 300;
 }
+
+ .navbar-nav {
+     padding-left: 10px;
+ }

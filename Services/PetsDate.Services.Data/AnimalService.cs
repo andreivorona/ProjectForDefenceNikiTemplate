@@ -128,5 +128,24 @@
                    ImageUrl = x.ImageUrl,
                 }).ToList();
         }
+
+        public AnimalListAllViewModel GetInfo(string userId, int animalId)
+        {
+            var result = this.animalsRepository.AllAsNoTracking()
+                .Where(x => x.Id == animalId && x.UserId == userId)
+                .Select(x => new AnimalListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Color = x.Color,
+                    Weight = x.Weight,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    ImageUrl = x.ImageUrl,
+                }).FirstOrDefault();
+
+            return result;
+        }
     }
 }

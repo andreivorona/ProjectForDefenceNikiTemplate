@@ -49,7 +49,7 @@
             await this.eventService.CreateAsync(input, user.Id);
 
             // todo return to Clinic info
-            return this.Redirect("/");
+            return this.Redirect("/Event/All");
         }
 
         [Authorize]

@@ -50,7 +50,6 @@
                 return this.View(input);
             }
 
-            // todo return to Hotel info
             return this.Redirect("/Hotel/All");
         }
 

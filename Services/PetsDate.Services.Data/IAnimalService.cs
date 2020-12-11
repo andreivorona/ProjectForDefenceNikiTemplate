@@ -15,6 +15,8 @@
 
         IEnumerable<AnimalImageListAllViewModel> GetAnimalImages(string userId, int animalId);
 
+        AnimalListAllViewModel GetInfo(string userId, int animalId);
+
         int GetCount();
 
         int GetImagesCount();
