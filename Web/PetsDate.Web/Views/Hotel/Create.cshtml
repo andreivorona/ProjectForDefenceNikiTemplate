@@ -11,7 +11,7 @@
     <section class="form-group">
         <label asp-for="Name"></label>
 
-        <input asp-for="Name" class="form-control" />
+        <input asp-for="Name" class="form-control" placeholder="Name..." />
 
         <span asp-validation-for="Name" class="text-danger"></span>
     </section>
@@ -19,7 +19,7 @@
     <section class="form-group">
         <label asp-for="Location"></label>
 
-        <input asp-for="Location" class="form-control" />
+        <input asp-for="Location" class="form-control" placeholder="Address..." />
 
         <span asp-validation-for="Location" class="text-danger"></span>
     </section>
@@ -27,7 +27,7 @@
     <section class="form-group">
         <label asp-for="Description"></label>
 
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <textarea asp-for="Description" class="form-control" placeholder="Message..."></textarea>
 
         <span asp-validation-for="Description" class="text-danger"></span>
     </section>
