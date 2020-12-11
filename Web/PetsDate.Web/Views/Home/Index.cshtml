@@ -25,41 +25,6 @@
         }
     </div>
 
-    <h2>We have:</h2>
-    <ul class="list-group">
-        <li class="list-group-item">
-            Users: @Model.UsersCount
-        </li>
-
-        <li class="list-group-item">
-            Animals: @Model.AnimalsCount
-        </li>
-
-        <li class="list-group-item">
-            Clinics: @Model.ClinicCount
-        </li>
-
-        <li class="list-group-item">
-            Publications: @Model.PublicationCount
-        </li>
-
-        <li class="list-group-item">
-            Events: @Model.EventsCount
-        </li>
-
-        <li class="list-group-item">
-            Hotels: @Model.HoteslCount
-        </li>
-
-        <li class="list-group-item">
-            Sos Signals: @Model.SosSignslsCount
-        </li>
-
-        <li class="list-group-item">
-            Categories: @Model.CategoriesCount
-        </li>
-    </ul>
-
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>

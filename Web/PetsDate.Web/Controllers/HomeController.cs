@@ -2,14 +2,11 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using PetsDate.Data;
-    using PetsDate.Data.Common.Repositories;
-    using PetsDate.Data.Models;
     using PetsDate.Services.Data;
     using PetsDate.Web.ViewModels;
-    using PetsDate.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
