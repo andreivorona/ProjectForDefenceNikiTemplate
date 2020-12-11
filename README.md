@@ -1,4 +1,4 @@
-# ProjectForDefenceNikiTemplate
+# ProjectForDefenceNikiTemplate APS.NET Core
 
 .Net 5.0,
 Admin Role,
