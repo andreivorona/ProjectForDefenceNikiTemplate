@@ -10,19 +10,19 @@
 
 <div class="container">
 
-    <div class="card col-md-3 mt-4 mr-4" style="width: 18rem">
-        <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Name</h5>
-            <p class="card-text">Age: @Model.Age</p>
-            <p class="card-text">Color: @Model.Color</p>
-            <p class="card-text">Weight: @Model.Weight</p>
-            <p class="card-text">Category: @Model.CategoryName</p>
-            <p class="card-text">AnimalId: @Model.Id</p>
+    
+        <img class="info-image" src="@Model.ImageUrl" alt="Card image cap">
+        
+            <h5 class="info-title">Name: @Model.Name</h5>
+            <p class="info-text">Age: @Model.Age</p>
+            <p class="info-text">Color: @Model.Color</p>
+            <p class="info-text">Weight: @Model.Weight</p>
+            <p class="info-text">Category: @Model.CategoryName</p>
+            <p class="info-text">AnimalId: @Model.Id</p>
 
             <a class="btn btn-primary mb-2" asp-area="" asp-controller="Animal" asp-action="All">Return</a>
 
-        </div>
-    </div>
+        
+    
 
 </div>
