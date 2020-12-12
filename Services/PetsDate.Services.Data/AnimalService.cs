@@ -147,5 +147,15 @@
 
             return result;
         }
+
+        public void Remove(int id)
+        {
+            var animalToDelete = this.animalsRepository.All()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            this.animalsRepository.Delete(animalToDelete);
+            this.animalsRepository.SaveChangesAsync();
+        }
     }
 }

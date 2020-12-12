@@ -20,5 +20,7 @@
         int GetCount();
 
         int GetImagesCount();
+
+        void Remove(int id);
     }
 }

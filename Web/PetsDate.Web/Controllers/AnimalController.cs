@@ -132,6 +132,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Info(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -139,6 +140,15 @@
             var viewModel = this.animalService.GetInfo(user.Id, id);
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            this.animalService.Remove(id);
+
+            return this.Redirect("/Animal/All");
         }
     }
 }
