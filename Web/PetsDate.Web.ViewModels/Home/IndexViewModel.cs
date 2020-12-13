@@ -1,8 +1,9 @@
-﻿using PetsDate.Data.Models;
-using System.Collections.Generic;
-
-namespace PetsDate.Web.ViewModels.Home
+﻿namespace PetsDate.Web.ViewModels.Home
 {
+    using System.Collections.Generic;
+
+    using PetsDate.Data.Models;
+
     public class IndexViewModel
     {
         public int UsersCount { get; set; }
@@ -12,8 +13,6 @@ namespace PetsDate.Web.ViewModels.Home
         public int ClinicCount { get; set; }
 
         public int PublicationCount { get; set; }
-
-        public int EventsCount { get; set; }
 
         public int HoteslCount { get; set; }
 

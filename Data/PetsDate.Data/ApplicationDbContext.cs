@@ -32,8 +32,6 @@
 
         public DbSet<Publication> Publications { get; set; }
 
-        public DbSet<Event> Events { get; set; }
-
         public DbSet<Hotel> Hotels { get; set; }
 
         public DbSet<SosSignal> SosSignals { get; set; }

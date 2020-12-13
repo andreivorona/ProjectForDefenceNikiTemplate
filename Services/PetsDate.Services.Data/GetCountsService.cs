@@ -13,7 +13,6 @@
         private readonly IDeletableEntityRepository<Animal> animalsRepository;
         private readonly IDeletableEntityRepository<Clinic> clinicsRepository;
         private readonly IDeletableEntityRepository<Publication> publicationRepository;
-        private readonly IDeletableEntityRepository<Event> eventsRepository;
         private readonly IDeletableEntityRepository<Hotel> hotelsRepository;
         private readonly IDeletableEntityRepository<SosSignal> sosSignslsRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
@@ -23,7 +22,6 @@
             IDeletableEntityRepository<Animal> animalsRepository,
             IDeletableEntityRepository<Clinic> clinicsRepository,
             IDeletableEntityRepository<Publication> publicationRepository,
-            IDeletableEntityRepository<Event> eventsRepository,
             IDeletableEntityRepository<Hotel> hotelsRepository,
             IDeletableEntityRepository<SosSignal> sosSignslsRepository,
             IDeletableEntityRepository<ApplicationUser> userRepository)
@@ -32,7 +30,6 @@
             this.animalsRepository = animalsRepository;
             this.clinicsRepository = clinicsRepository;
             this.publicationRepository = publicationRepository;
-            this.eventsRepository = eventsRepository;
             this.hotelsRepository = hotelsRepository;
             this.sosSignslsRepository = sosSignslsRepository;
             this.userRepository = userRepository;
@@ -45,7 +42,6 @@
                 UsersCount = this.userRepository.All().Count(),
                 AnimalsCount = this.animalsRepository.All().Count(),
                 ClinicCount = this.clinicsRepository.All().Count(),
-                EventsCount = this.eventsRepository.All().Count(),
                 HoteslCount = this.hotelsRepository.All().Count(),
                 PublicationCount = this.publicationRepository.All().Count(),
                 SosSignslsCount = this.sosSignslsRepository.All().Count(),

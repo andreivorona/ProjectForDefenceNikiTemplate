@@ -8,6 +8,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationInsightsResourceId>/subscriptions/702c0d3c-0e6d-41aa-98e8-c50cb8dda1f1/resourceGroups/petsDate/providers/microsoft.insights/components/petsDate</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,16 +17,15 @@
     <EmbeddedResource Remove="wwwroot\AnimalImages\**" />
     <None Remove="wwwroot\AnimalImages\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Views\Event\Create.cshtml" />
-  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.2.2" />
     <PackageReference Include="Cloudinary.Core" Version="1.31.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -61,9 +61,5 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Dashboard\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Event\Create.cshtml" />
   </ItemGroup>
 </Project>

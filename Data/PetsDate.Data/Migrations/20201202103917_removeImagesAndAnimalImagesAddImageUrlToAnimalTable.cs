@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace PetsDate.Data.Migrations
+﻿namespace PetsDate.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class removeImagesAndAnimalImagesAddImageUrlToAnimalTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,7 +36,7 @@ namespace PetsDate.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -59,7 +60,7 @@ namespace PetsDate.Data.Migrations
                 columns: table => new
                 {
                     AnimalId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                 },
                 constraints: table =>
                 {

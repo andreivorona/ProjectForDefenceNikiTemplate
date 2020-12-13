@@ -74,7 +74,6 @@
             services.AddTransient<IAnimalService, AnimalService>();
             services.AddTransient<IClinicService, ClinicService>();
             services.AddTransient<IPublicationService, PublicationService>();
-            services.AddTransient<IEventService, EventService>();
             services.AddTransient<IHotelService, HotelService>();
             services.AddTransient<ISosSignalService, SosSignalService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
