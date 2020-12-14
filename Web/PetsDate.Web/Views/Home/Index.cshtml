@@ -5,7 +5,13 @@
 }
 
 <div class="text-center">
+
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-info" asp-controller="Home" asp-action="Chat" target="_blank">chat page</a>
+    }
 
     <div class="container row justify-content-xl-center">
 
@@ -31,10 +37,5 @@
     }
 
     <hr />
-
-    @if (this.User.Identity.IsAuthenticated)
-    {
-        <a class="btn btn-info" asp-controller="Home" asp-action="Chat">chat page</a>
-    }
 
 </div>

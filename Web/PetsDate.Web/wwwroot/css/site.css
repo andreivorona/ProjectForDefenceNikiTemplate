@@ -158,3 +158,9 @@ a {
 .pb-3 {
     text-align: center;
 }
+
+.btn-info {
+    font-size: 2rem;
+    font-size: 2rem;
+    box-shadow: lightblue 10px 10px 20px 0;
+}
