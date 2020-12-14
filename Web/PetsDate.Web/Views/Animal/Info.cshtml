@@ -18,7 +18,60 @@
     <p class="info-text">Weight: @Model.Weight</p>
     <p class="info-text">Category: @Model.CategoryName</p>
 
+    <ul class="item-rating">
+        <li class="star-fill" data-vote="1">
+            <i class="fas fa-star"></i>
+        </li>
+        <li class="star-fill" data-vote="2">
+            <i class="fas fa-star"></i>
+        </li>
+        <li class="star-fill" data-vote="3">
+            <i class="fas fa-star"></i>
+        </li>
+        <li class="star-fill" data-vote="4">
+            <i class="fas fa-star"></i>
+        </li>
+        <li class="star-fill" data-vote="5">
+            <i class="fas fa-star"></i>
+        </li>
+        <li><span id="averageVoteValue">@Model.VotesAverageValue.ToString("0.0")</span><span> / 5</span></li>
+    </ul>
+
     <a class="btn btn-primary mb-2" asp-area="" asp-controller="Animal" asp-action="All">Return</a>
 
     <a class="btn btn-danger mb-2" asp-controller="Animal" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 </div>
+
+<form method="post" id="antiForgeryForm">
+
+</form>
+
+@section Scripts {
+    <script>
+        $("li[data-vote]").each(function () {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+
+                var animalId = @Model.Id;
+
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+
+                var data = { animalId: animalId, value: value };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                        console.log(data.averageVote);
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+}

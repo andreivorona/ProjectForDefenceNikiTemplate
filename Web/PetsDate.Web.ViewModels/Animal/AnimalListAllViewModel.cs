@@ -17,5 +17,7 @@
         public string CategoryName { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public double VotesAverageValue { get; set; }
     }
 }

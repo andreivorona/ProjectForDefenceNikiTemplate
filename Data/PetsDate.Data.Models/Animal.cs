@@ -27,5 +27,7 @@
         public string ImageUrl { get; set; }
 
         public virtual ICollection<AnimalImage> AnimalImages { get; set; } = new HashSet<AnimalImage>();
+
+        public virtual ICollection<Vote> Votes { get; set; } = new HashSet<Vote>();
     }
 }

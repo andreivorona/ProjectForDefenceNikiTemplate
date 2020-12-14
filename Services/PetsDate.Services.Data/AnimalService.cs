@@ -20,19 +20,22 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly Cloudinary cloudinary;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IVotesService votesService;
 
         public AnimalService(
             IRepository<AnimalImage> animalImagesRepository,
             IDeletableEntityRepository<Animal> animalsRepository,
             UserManager<ApplicationUser> userManager,
             Cloudinary cloudinary,
-            ICloudinaryService cloudinaryService)
+            ICloudinaryService cloudinaryService,
+            IVotesService votesService)
         {
             this.animalImagesRepository = animalImagesRepository;
             this.animalsRepository = animalsRepository;
             this.userManager = userManager;
             this.cloudinary = cloudinary;
             this.cloudinaryService = cloudinaryService;
+            this.votesService = votesService;
         }
 
         public async Task CreateAsync(CreateAnimalInputModel input, string userId)
@@ -131,6 +134,8 @@
 
         public AnimalListAllViewModel GetInfo(string userId, int animalId)
         {
+            var votesAverageValue = this.votesService.GetAverageVotes(animalId);
+
             var result = this.animalsRepository.AllAsNoTracking()
                 .Where(x => x.Id == animalId && x.UserId == userId)
                 .Select(x => new AnimalListAllViewModel
@@ -143,6 +148,7 @@
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     ImageUrl = x.ImageUrl,
+                    VotesAverageValue = votesAverageValue,
                 }).FirstOrDefault();
 
             return result;

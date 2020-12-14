@@ -60,6 +60,11 @@
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -77,6 +82,7 @@
             services.AddTransient<IHotelService, HotelService>();
             services.AddTransient<ISosSignalService, SosSignalService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IVotesService, VotesService>();
 
             //// add cloudinary for images
 
