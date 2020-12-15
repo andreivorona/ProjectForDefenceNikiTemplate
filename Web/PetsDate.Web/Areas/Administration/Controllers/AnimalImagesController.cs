@@ -3,13 +3,16 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
+    using PetsDate.Common;
     using PetsDate.Data;
     using PetsDate.Data.Models;
 
     [Area("Administration")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AnimalImagesController : Controller
     {
         private readonly ApplicationDbContext db;

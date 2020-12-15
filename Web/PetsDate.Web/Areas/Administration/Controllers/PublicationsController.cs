@@ -1,5 +1,7 @@
 ﻿namespace PetsDate.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,27 +16,27 @@
 
     [Area("Administration")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-    public class ClinicsController : Controller
+    public class PublicationsController : Controller
     {
         private readonly ApplicationDbContext db;
-        private readonly IDeletableEntityRepository<Clinic> dataRepository;
+        private readonly IDeletableEntityRepository<Publication> dataRepository;
 
-        public ClinicsController(
+        public PublicationsController(
             ApplicationDbContext context,
-            IDeletableEntityRepository<Clinic> dataRepository)
+            IDeletableEntityRepository<Publication> dataRepository)
         {
             this.db = context;
             this.dataRepository = dataRepository;
         }
 
-        // GET: Administration/Clinics
+        // GET: Administration/Publications
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = this.db.Clinics.Include(c => c.User);
+            var applicationDbContext = this.db.Publications.Include(p => p.User);
             return this.View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Administration/Clinics/Details/5
+        // GET: Administration/Publications/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -42,43 +44,43 @@
                 return this.NotFound();
             }
 
-            var clinic = await this.db.Clinics
-                .Include(c => c.User)
+            var publication = await this.db.Publications
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clinic == null)
+            if (publication == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(clinic);
+            return this.View(publication);
         }
 
-        // GET: Administration/Clinics/Create
+        // GET: Administration/Publications/Create
         public IActionResult Create()
         {
             this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id");
             return this.View();
         }
 
-        // POST: Administration/Clinics/Create
+        // POST: Administration/Publications/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Location,ImageUrl,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Clinic clinic)
+        public async Task<IActionResult> Create([Bind("Description,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Publication publication)
         {
             if (this.ModelState.IsValid)
             {
-                this.db.Add(clinic);
+                this.db.Add(publication);
                 await this.db.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", clinic.UserId);
-            return this.View(clinic);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", publication.UserId);
+            return this.View(publication);
         }
 
-        // GET: Administration/Clinics/Edit/5
+        // GET: Administration/Publications/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -86,24 +88,24 @@
                 return this.NotFound();
             }
 
-            var clinic = await this.db.Clinics.FindAsync(id);
-            if (clinic == null)
+            var publication = await this.db.Publications.FindAsync(id);
+            if (publication == null)
             {
                 return this.NotFound();
             }
 
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", clinic.UserId);
-            return this.View(clinic);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", publication.UserId);
+            return this.View(publication);
         }
 
-        // POST: Administration/Clinics/Edit/5
+        // POST: Administration/Publications/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Name,Location,ImageUrl,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Clinic clinic)
+        public async Task<IActionResult> Edit(string id, [Bind("Description,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Publication publication)
         {
-            if (id != clinic.Id)
+            if (id != publication.Id)
             {
                 return this.NotFound();
             }
@@ -112,12 +114,12 @@
             {
                 try
                 {
-                    this.db.Update(clinic);
+                    this.db.Update(publication);
                     await this.db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.ClinicExists(clinic.Id))
+                    if (!this.PublicationExists(publication.Id))
                     {
                         return this.NotFound();
                     }
@@ -130,11 +132,11 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", clinic.UserId);
-            return this.View(clinic);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", publication.UserId);
+            return this.View(publication);
         }
 
-        // GET: Administration/Clinics/Delete/5
+        // GET: Administration/Publications/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -142,32 +144,32 @@
                 return this.NotFound();
             }
 
-            var clinic = await this.db.Clinics
-                .Include(c => c.User)
+            var publication = await this.db.Publications
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clinic == null)
+            if (publication == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(clinic);
+            return this.View(publication);
         }
 
-        // POST: Administration/Clinics/Delete/5
+        // POST: Administration/Publications/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var clinic = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
-            this.dataRepository.Delete(clinic);
+            var publication = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
+            this.dataRepository.Delete(publication);
             await this.dataRepository.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private bool ClinicExists(string id)
+        private bool PublicationExists(string id)
         {
-            return this.db.Clinics.Any(e => e.Id == id);
+            return this.db.Publications.Any(e => e.Id == id);
         }
     }
 }
