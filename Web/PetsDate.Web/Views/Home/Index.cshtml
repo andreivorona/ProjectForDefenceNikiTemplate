@@ -68,6 +68,13 @@
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Hotels" asp-action="Index">Hotels Control Panel</a>
+    }
+
+    <hr />
+
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Publications" asp-action="Index">Publications Control Panel</a>
     }
 
