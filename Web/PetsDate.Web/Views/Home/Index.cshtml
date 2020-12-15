@@ -33,7 +33,21 @@
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
-        <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page</a>
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page Counts</a>
+    }
+
+    <hr />
+
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Animals" asp-action="Index">Animals Controll Panel</a>
+    }
+
+    <hr />
+
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Controll Panel</a>
     }
 
     <hr />
