@@ -47,6 +47,13 @@
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="AnimalImages" asp-action="Index">AnimalImages Controll Panel</a>
+    }
+
+    <hr />
+
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Controll Panel</a>
     }
 

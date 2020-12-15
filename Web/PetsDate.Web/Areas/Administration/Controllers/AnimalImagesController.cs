@@ -3,38 +3,30 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
-    using PetsDate.Common;
     using PetsDate.Data;
-    using PetsDate.Data.Common.Repositories;
     using PetsDate.Data.Models;
 
     [Area("Administration")]
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-    public class AnimalsController : Controller
+    public class AnimalImagesController : Controller
     {
         private readonly ApplicationDbContext db;
-        private readonly IDeletableEntityRepository<Animal> dataRepository;
 
-        public AnimalsController(
-            ApplicationDbContext context,
-            IDeletableEntityRepository<Animal> dataRepository)
+        public AnimalImagesController(ApplicationDbContext context)
         {
             this.db = context;
-            this.dataRepository = dataRepository;
         }
 
-        // GET: Administration/Animals
+        // GET: Administration/AnimalImages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = this.db.Animals.Include(a => a.Category).Include(a => a.User);
+            var applicationDbContext = this.db.AnimalImages.Include(a => a.Animal).Include(a => a.User);
             return this.View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Administration/Animals/Details/5
+        // GET: Administration/AnimalImages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,46 +34,46 @@
                 return this.NotFound();
             }
 
-            var animal = await this.db.Animals
-                .Include(a => a.Category)
+            var animalImage = await this.db.AnimalImages
+                .Include(a => a.Animal)
                 .Include(a => a.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (animal == null)
+            if (animalImage == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(animal);
+            return this.View(animalImage);
         }
 
-        // GET: Administration/Animals/Create
+        // GET: Administration/AnimalImages/Create
         public IActionResult Create()
         {
-            this.ViewData["CategoryId"] = new SelectList(this.db.Categories, "Id", "Id");
+            this.ViewData["AnimalId"] = new SelectList(this.db.Animals, "Id", "Id");
             this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id");
             return this.View();
         }
 
-        // POST: Administration/Animals/Create
+        // POST: Administration/AnimalImages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Age,Color,Weight,CategoryId,UserId,ImageUrl,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Animal animal)
+        public async Task<IActionResult> Create([Bind("UserId,AnimalId,ImageUrl,Id,CreatedOn,ModifiedOn")] AnimalImage animalImage)
         {
             if (this.ModelState.IsValid)
             {
-                this.db.Add(animal);
+                this.db.Add(animalImage);
                 await this.db.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["CategoryId"] = new SelectList(this.db.Categories, "Id", "Id", animal.CategoryId);
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animal.UserId);
-            return this.View(animal);
+            this.ViewData["AnimalId"] = new SelectList(this.db.Animals, "Id", "Id", animalImage.AnimalId);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animalImage.UserId);
+            return this.View(animalImage);
         }
 
-        // GET: Administration/Animals/Edit/5
+        // GET: Administration/AnimalImages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,25 +81,25 @@
                 return this.NotFound();
             }
 
-            var animal = await this.db.Animals.FindAsync(id);
-            if (animal == null)
+            var animalImage = await this.db.AnimalImages.FindAsync(id);
+            if (animalImage == null)
             {
                 return this.NotFound();
             }
 
-            this.ViewData["CategoryId"] = new SelectList(this.db.Categories, "Id", "Id", animal.CategoryId);
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animal.UserId);
-            return this.View(animal);
+            this.ViewData["AnimalId"] = new SelectList(this.db.Animals, "Id", "Id", animalImage.AnimalId);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animalImage.UserId);
+            return this.View(animalImage);
         }
 
-        // POST: Administration/Animals/Edit/5
+        // POST: Administration/AnimalImages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Age,Color,Weight,CategoryId,UserId,ImageUrl,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Animal animal)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,AnimalId,ImageUrl,Id,CreatedOn,ModifiedOn")] AnimalImage animalImage)
         {
-            if (id != animal.Id)
+            if (id != animalImage.Id)
             {
                 return this.NotFound();
             }
@@ -116,12 +108,12 @@
             {
                 try
                 {
-                    this.db.Update(animal);
+                    this.db.Update(animalImage);
                     await this.db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.AnimalExists(animal.Id))
+                    if (!this.AnimalImageExists(animalImage.Id))
                     {
                         return this.NotFound();
                     }
@@ -134,12 +126,12 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["CategoryId"] = new SelectList(this.db.Categories, "Id", "Id", animal.CategoryId);
-            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animal.UserId);
-            return this.View(animal);
+            this.ViewData["AnimalId"] = new SelectList(this.db.Animals, "Id", "Id", animalImage.AnimalId);
+            this.ViewData["UserId"] = new SelectList(this.db.Users, "Id", "Id", animalImage.UserId);
+            return this.View(animalImage);
         }
 
-        // GET: Administration/Animals/Delete/5
+        // GET: Administration/AnimalImages/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,33 +139,33 @@
                 return this.NotFound();
             }
 
-            var animal = await this.db.Animals
-                .Include(a => a.Category)
+            var animalImage = await this.db.AnimalImages
+                .Include(a => a.Animal)
                 .Include(a => a.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (animal == null)
+            if (animalImage == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(animal);
+            return this.View(animalImage);
         }
 
-        // POST: Administration/Animals/Delete/5
+        // POST: Administration/AnimalImages/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var animal = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
-            this.dataRepository.Delete(animal);
-            await this.dataRepository.SaveChangesAsync();
+            var animalImage = await this.db.AnimalImages.FindAsync(id);
+            this.db.AnimalImages.Remove(animalImage);
+            await this.db.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private bool AnimalExists(int id)
+        private bool AnimalImageExists(int id)
         {
-            return this.db.Animals.Any(e => e.Id == id);
+            return this.db.AnimalImages.Any(e => e.Id == id);
         }
     }
 }
