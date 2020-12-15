@@ -79,4 +79,11 @@
     }
 
     <hr />
+
+    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
+    {
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="SosSignals" asp-action="Index">SOS Signals Control Panel</a>
+    }
+
+    <hr />
 </div>
