@@ -27,6 +27,10 @@
 
         int GetImagesCount();
 
+        EditAnimalInputModel GetById(int animalId);
+
+        Task UpdateAsync(int animalId, EditAnimalInputModel input);
+
         void Remove(int id);
     }
 }

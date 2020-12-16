@@ -203,6 +203,39 @@
             return result;
         }
 
+        public EditAnimalInputModel GetById(int animalId)
+        {
+            var result = this.animalsRepository.AllAsNoTracking()
+                .Where(x => x.Id == animalId)
+                .Select(x => new EditAnimalInputModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Color = x.Color,
+                    Weight = x.Weight,
+                    CategoryId = x.CategoryId,
+                    ImageUrl = x.ImageUrl,
+                }).FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task UpdateAsync(int animalId, EditAnimalInputModel input)
+        {
+            var animal = this.animalsRepository.All()
+                .FirstOrDefault(x => x.Id == animalId);
+
+            animal.Name = input.Name;
+            animal.Age = input.Age;
+            animal.ImageUrl = input.ImageUrl;
+            animal.Weight = input.Weight;
+            animal.Color = input.Color;
+            animal.CategoryId = input.CategoryId;
+
+            await this.animalsRepository.SaveChangesAsync();
+        }
+
         public void Remove(int id)
         {
             var animalToDelete = this.animalsRepository.All()

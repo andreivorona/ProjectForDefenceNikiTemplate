@@ -90,7 +90,7 @@
         }
 
         [Authorize]
-        public IActionResult AddImages(int id)
+        public IActionResult AddImages()
         {
             return this.View();
         }
@@ -140,6 +140,32 @@
             var viewModel = this.animalService.GetInfo(user.Id, id);
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.animalService.GetById(id);
+
+            viewModel.CategoriesItems = this.categoriesService.GetAllKeyValuePairs();
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditAnimalInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.CategoriesItems = this.categoriesService.GetAllKeyValuePairs();
+
+                return this.View(input);
+            }
+
+            await this.animalService.UpdateAsync(id, input);
+
+            return this.Redirect("/Animal/All");
         }
 
         [Authorize]
