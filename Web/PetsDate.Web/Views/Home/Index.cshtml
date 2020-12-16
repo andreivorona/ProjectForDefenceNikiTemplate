@@ -84,6 +84,28 @@
         }
     </div>
 
+    <hr />
+
+    <h2>All Posted Publications</h2>
+
+    <div class="container row justify-content-xl-center">
+
+        @foreach (var publication in this.Model.Publications)
+        {
+            <div class="card col-md-3 mt-4 mr-4">
+
+                <div class="card-body">
+                    <h5 class="card-title">@publication.Username</h5>
+
+                    <p class="card-text">Description: @publication.Description</p>
+
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr />
+
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page Counts</a>

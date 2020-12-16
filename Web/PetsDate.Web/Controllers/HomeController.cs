@@ -14,15 +14,18 @@
         private readonly IGetCountsService countsService;
         private readonly IAnimalService animalService;
         private readonly IClinicService clinicService;
+        private readonly IPublicationService publicationService;
 
         public HomeController(
             IGetCountsService countsService,
             IAnimalService animalService,
-            IClinicService clinicService)
+            IClinicService clinicService,
+            IPublicationService publicationService)
         {
             this.countsService = countsService;
             this.animalService = animalService;
             this.clinicService = clinicService;
+            this.publicationService = publicationService;
         }
 
         public IActionResult Index()
@@ -31,6 +34,7 @@
             viewModel.Users = this.countsService.GetAll().ToList();
             viewModel.Animals = this.animalService.GetAllHomePage();
             viewModel.Clinics = this.clinicService.GetAllHomePage();
+            viewModel.Publications = this.publicationService.GetAllHomePage();
 
             return this.View(viewModel);
         }

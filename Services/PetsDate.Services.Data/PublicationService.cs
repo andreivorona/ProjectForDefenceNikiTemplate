@@ -43,6 +43,17 @@
                 }).ToList();
         }
 
+        public IEnumerable<PublicationListAllViewModel> GetAllHomePage()
+        {
+            return this.publicationRepository.AllAsNoTracking()
+                .Select(x => new PublicationListAllViewModel
+                {
+                    Username = x.User.UserName,
+                    Description = x.Description,
+                    UserName = x.User.UserName,
+                }).ToList();
+        }
+
         public int GetCount()
         {
             return this.publicationRepository.All().Count();

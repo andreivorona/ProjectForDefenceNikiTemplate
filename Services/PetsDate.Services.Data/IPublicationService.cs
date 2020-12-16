@@ -11,6 +11,8 @@
 
         IEnumerable<PublicationListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
+        IEnumerable<PublicationListAllViewModel> GetAllHomePage();
+
         int GetCount();
     }
 }

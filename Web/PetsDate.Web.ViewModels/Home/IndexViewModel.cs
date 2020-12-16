@@ -5,6 +5,7 @@
     using PetsDate.Data.Models;
     using PetsDate.Web.ViewModels.Animal;
     using PetsDate.Web.ViewModels.Clinic;
+    using PetsDate.Web.ViewModels.Publication;
 
     public class IndexViewModel
     {
@@ -25,6 +26,8 @@
         public IEnumerable<AnimalListAllViewModel> Animals { get; set; }
 
         public IEnumerable<ClinicListAllViewModel> Clinics { get; set; }
+
+        public IEnumerable<PublicationListAllViewModel> Publications { get; set; }
 
         public ICollection<ApplicationUser> Users { get; set; } = new HashSet<ApplicationUser>();
     }
