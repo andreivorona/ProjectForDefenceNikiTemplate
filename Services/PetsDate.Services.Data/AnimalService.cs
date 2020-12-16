@@ -112,6 +112,23 @@
             // 13-24 - page 2  skip 12
         }
 
+        public IEnumerable<AnimalListAllViewModel> GetAllHomePage()
+        {
+            return this.animalsRepository.AllAsNoTracking()
+                .Select(x => new AnimalListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Color = x.Color,
+                    Weight = x.Weight,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).ToList();
+        }
+
         public int GetImagesCount()
         {
             return this.animalImagesRepository.All().Count();
@@ -130,6 +147,38 @@
                 {
                    ImageUrl = x.ImageUrl,
                 }).ToList();
+        }
+
+        public IEnumerable<AnimalImageListAllViewModel> GetAnimalImagesHomePage(int animalId)
+        {
+            return this.animalImagesRepository.AllAsNoTracking()
+                .Where(x => x.AnimalId == animalId)
+                .Select(x => new AnimalImageListAllViewModel
+                {
+                    ImageUrl = x.ImageUrl,
+                }).ToList();
+        }
+
+        public AnimalListAllViewModel GetInfoHomePage(int animalId)
+        {
+            var votesAverageValue = this.votesService.GetAverageVotes(animalId);
+
+            var result = this.animalsRepository.AllAsNoTracking()
+                .Where(x => x.Id == animalId)
+                .Select(x => new AnimalListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Age = x.Age,
+                    Color = x.Color,
+                    Weight = x.Weight,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    ImageUrl = x.ImageUrl,
+                    VotesAverageValue = votesAverageValue,
+                }).FirstOrDefault();
+
+            return result;
         }
 
         public AnimalListAllViewModel GetInfo(string userId, int animalId)

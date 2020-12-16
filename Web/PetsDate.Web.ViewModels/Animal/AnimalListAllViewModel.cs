@@ -19,5 +19,7 @@
         public string ImageUrl { get; set; }
 
         public double VotesAverageValue { get; set; }
+
+        public string UserName { get; set; }
     }
 }

@@ -17,6 +17,12 @@
 
         AnimalListAllViewModel GetInfo(string userId, int animalId);
 
+        IEnumerable<AnimalListAllViewModel> GetAllHomePage();
+
+        AnimalListAllViewModel GetInfoHomePage(int animalId);
+
+        IEnumerable<AnimalImageListAllViewModel> GetAnimalImagesHomePage(int animalId);
+
         int GetCount();
 
         int GetImagesCount();
