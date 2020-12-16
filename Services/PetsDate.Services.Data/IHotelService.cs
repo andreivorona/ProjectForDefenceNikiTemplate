@@ -11,6 +11,8 @@
 
         IEnumerable<HotelListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
+        IEnumerable<HotelListAllViewModel> GetAllHomePage();
+
         int GetCount();
     }
 }

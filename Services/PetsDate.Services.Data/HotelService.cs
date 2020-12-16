@@ -68,6 +68,19 @@
                 }).ToList();
         }
 
+        public IEnumerable<HotelListAllViewModel> GetAllHomePage()
+        {
+            return this.hotelsRepository.AllAsNoTracking()
+                .Select(x => new HotelListAllViewModel
+                {
+                    Name = x.Name,
+                    Location = x.Location,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).ToList();
+        }
+
         public int GetCount()
         {
             return this.hotelsRepository.All().Count();
