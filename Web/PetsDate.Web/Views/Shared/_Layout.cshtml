@@ -34,7 +34,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Animal" asp-action="All">All Animals</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Animal" asp-action="All">All User Animals</a>
                             </li>
 
                             <li class="nav-item">
@@ -42,7 +42,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clinic" asp-action="All">All Clinics</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Clinic" asp-action="All">All User Clinics</a>
                             </li>
 
                             <li class="nav-item">
@@ -50,7 +50,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Publication" asp-action="All">All Publication</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Publication" asp-action="All">All User Publication</a>
                             </li>
 
                             <li class="nav-item">
@@ -58,7 +58,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All Hotels</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="All">All User Hotels</a>
                             </li>
 
                             <li class="nav-item">
@@ -66,7 +66,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SosSignal" asp-action="All">All Sos Signals</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SosSignal" asp-action="All">All User Sos Signals</a>
                             </li>
                         }
                     </ul>
@@ -84,7 +84,7 @@
     
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName
+            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </div>
     </footer>
 
