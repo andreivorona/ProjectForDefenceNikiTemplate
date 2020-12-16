@@ -66,6 +66,18 @@
                 }).ToList();
         }
 
+        public IEnumerable<ClinicListAllViewModel> GetAllHomePage()
+        {
+            return this.clinicsRepository.AllAsNoTracking()
+                .Select(x => new ClinicListAllViewModel
+                {
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).ToList();
+        }
+
         public int GetCount()
         {
             return this.clinicsRepository.All().Count();

@@ -11,7 +11,7 @@
     @if (this.User.Identity.IsAuthenticated)
     {
         <a class="btn btn-info" asp-controller="Home" asp-action="Chat" target="_blank">chat page</a>
-    
+
         <hr />
     }
 
@@ -62,6 +62,28 @@
         }
     </div>
 
+    <hr />
+
+    <h2>All Posted Clinics</h2>
+
+    <div class="container row justify-content-xl-center">
+
+        @foreach (var clinic in this.Model.Clinics)
+        {
+            <div class="card col-md-3 mt-4 mr-4">
+                <img class="card-img-top" src="@clinic.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Posted: @clinic.UserName</h5>
+
+                    <h5 class="card-title">@clinic.Name</h5>
+
+                    <p class="card-text">Location: @clinic.Location</p>
+
+                </div>
+            </div>
+        }
+    </div>
+
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Edit" asp-action="Index">Admin Page Counts</a>
@@ -74,49 +96,49 @@
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Animals" asp-action="Index">Animals Control Panel</a>
-        
+
         <hr />
     }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="AnimalImages" asp-action="Index">AnimalImages Control Panel</a>
-    
+
         <hr />
-     }
+    }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Control Panel</a>
-        
+
         <hr />
     }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Clinics" asp-action="Index">Clinics Control Panel</a>
-    
-        <hr />    
+
+        <hr />
     }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Hotels" asp-action="Index">Hotels Control Panel</a>
-    
-        <hr />    
+
+        <hr />
     }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="Publications" asp-action="Index">Publications Control Panel</a>
-    
+
         <hr />
     }
 
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
     {
         <a class="btn btn-danger" asp-area="Administration" asp-controller="SosSignals" asp-action="Index">SOS Signals Control Panel</a>
-    
+
         <hr />
     }
 

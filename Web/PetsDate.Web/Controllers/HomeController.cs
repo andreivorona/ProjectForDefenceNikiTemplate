@@ -13,13 +13,16 @@
     {
         private readonly IGetCountsService countsService;
         private readonly IAnimalService animalService;
+        private readonly IClinicService clinicService;
 
         public HomeController(
             IGetCountsService countsService,
-            IAnimalService animalService)
+            IAnimalService animalService,
+            IClinicService clinicService)
         {
             this.countsService = countsService;
             this.animalService = animalService;
+            this.clinicService = clinicService;
         }
 
         public IActionResult Index()
@@ -27,6 +30,7 @@
             var viewModel = this.countsService.GetCounts();
             viewModel.Users = this.countsService.GetAll().ToList();
             viewModel.Animals = this.animalService.GetAllHomePage();
+            viewModel.Clinics = this.clinicService.GetAllHomePage();
 
             return this.View(viewModel);
         }

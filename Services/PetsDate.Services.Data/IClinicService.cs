@@ -11,6 +11,9 @@
 
         IEnumerable<ClinicListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
+        IEnumerable<ClinicListAllViewModel> GetAllHomePage();
+
+
         int GetCount();
     }
 }
