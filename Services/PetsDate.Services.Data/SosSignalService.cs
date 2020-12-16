@@ -68,6 +68,19 @@
                 }).ToList();
         }
 
+        public IEnumerable<SosSignalListAllViewModel> GetAllHomePage()
+        {
+            return this.sosSignalsRepository.AllAsNoTracking()
+                .Select(x => new SosSignalListAllViewModel
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).ToList();
+        }
+
         public int GetCount()
         {
             return this.sosSignalsRepository.All().Count();

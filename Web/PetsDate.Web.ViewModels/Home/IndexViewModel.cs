@@ -7,6 +7,7 @@
     using PetsDate.Web.ViewModels.Clinic;
     using PetsDate.Web.ViewModels.Hotel;
     using PetsDate.Web.ViewModels.Publication;
+    using PetsDate.Web.ViewModels.SosSignal;
 
     public class IndexViewModel
     {
@@ -31,6 +32,8 @@
         public IEnumerable<PublicationListAllViewModel> Publications { get; set; }
 
         public IEnumerable<HotelListAllViewModel> Hotels { get; set; }
+
+        public IEnumerable<SosSignalListAllViewModel> SosSignals { get; set; }
 
         public ICollection<ApplicationUser> Users { get; set; } = new HashSet<ApplicationUser>();
     }

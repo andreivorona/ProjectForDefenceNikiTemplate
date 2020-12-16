@@ -16,19 +16,22 @@
         private readonly IClinicService clinicService;
         private readonly IPublicationService publicationService;
         private readonly IHotelService hotelService;
+        private readonly ISosSignalService sosSignalService;
 
         public HomeController(
             IGetCountsService countsService,
             IAnimalService animalService,
             IClinicService clinicService,
             IPublicationService publicationService,
-            IHotelService hotelService)
+            IHotelService hotelService,
+            ISosSignalService sosSignalService)
         {
             this.countsService = countsService;
             this.animalService = animalService;
             this.clinicService = clinicService;
             this.publicationService = publicationService;
             this.hotelService = hotelService;
+            this.sosSignalService = sosSignalService;
         }
 
         public IActionResult Index()
@@ -39,6 +42,7 @@
             viewModel.Clinics = this.clinicService.GetAllHomePage();
             viewModel.Publications = this.publicationService.GetAllHomePage();
             viewModel.Hotels = this.hotelService.GetAllHomePage();
+            viewModel.SosSignals = this.sosSignalService.GetAllHomePage();
 
             return this.View(viewModel);
         }

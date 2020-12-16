@@ -11,6 +11,8 @@
 
         IEnumerable<SosSignalListAllViewModel> GetAll(int page, string userId, int itemsPerPage);
 
+        IEnumerable<SosSignalListAllViewModel> GetAllHomePage();
+
         int GetCount();
     }
 }
