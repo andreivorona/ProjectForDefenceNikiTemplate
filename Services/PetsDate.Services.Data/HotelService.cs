@@ -125,6 +125,15 @@
             await this.hotelsRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string hotelId)
+        {
+            var hotel = this.hotelsRepository.All()
+                .FirstOrDefault(x => x.Id == hotelId);
+
+            this.hotelsRepository.Delete(hotel);
+            await this.hotelsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.hotelsRepository.All().Count();

@@ -19,6 +19,8 @@
 
         Task UpdateAsync(string hotelId, EditHotelInputModel input);
 
+        Task DeleteAsync(string hotelId);
+
         int GetCount();
     }
 }

@@ -122,10 +122,10 @@
 
         public async Task DeleteAsync(string clinicId)
         {
-            var animal = this.clinicsRepository.All()
+            var clinic = this.clinicsRepository.All()
                 .FirstOrDefault(x => x.Id == clinicId);
 
-            this.clinicsRepository.Delete(animal);
+            this.clinicsRepository.Delete(clinic);
             await this.clinicsRepository.SaveChangesAsync();
         }
 

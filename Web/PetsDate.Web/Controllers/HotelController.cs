@@ -107,5 +107,14 @@
 
             return this.Redirect("/Hotel/All");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.hotelService.DeleteAsync(id);
+
+            return this.Redirect("/Hotel/All");
+        }
     }
 }
