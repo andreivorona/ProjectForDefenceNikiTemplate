@@ -13,6 +13,8 @@
 
         IEnumerable<SosSignalListAllViewModel> GetAllHomePage();
 
+        SosSignalListAllViewModel GetInfo(string userId, string sosSignalId);
+
         int GetCount();
     }
 }

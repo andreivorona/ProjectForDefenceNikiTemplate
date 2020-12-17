@@ -61,6 +61,7 @@
                 .Take(itemsPerPage)
                 .Select(x => new SosSignalListAllViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
                     Location = x.Location,
@@ -79,6 +80,21 @@
                     ImageUrl = x.ImageUrl,
                     UserName = x.User.UserName,
                 }).ToList();
+        }
+
+        public SosSignalListAllViewModel GetInfo(string userId, string sosSignalId)
+        {
+            return this.sosSignalsRepository.AllAsNoTracking()
+                .Where(x => x.Id == sosSignalId && x.UserId == userId)
+                .Select(x => new SosSignalListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).FirstOrDefault();
         }
 
         public int GetCount()

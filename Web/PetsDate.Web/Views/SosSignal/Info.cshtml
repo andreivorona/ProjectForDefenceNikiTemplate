@@ -1,0 +1,25 @@
+﻿@model PetsDate.Web.ViewModels.SosSignal.SosSignalListAllViewModel
+
+@{
+    this.ViewData["Title"] = "Hotel Info Page";
+}
+
+<div class="text-center h1">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<div class="container">
+
+    <img class="info-image" src="@Model.ImageUrl" alt="Card image cap">
+
+    <h5 class="info-title">Name: @Model.Name</h5>
+    <p class="info-text">Adress: @Model.Location</p>
+
+    <p class="info-text">Description: @Model.Description</p>
+
+
+    <a class="btn btn-primary mb-2" asp-area="" asp-controller="SosSignal" asp-action="All">Return</a>
+
+    <a class="btn btn-dark mb-2" asp-controller="SosSignal" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+</div>
+
