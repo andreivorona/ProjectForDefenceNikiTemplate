@@ -236,14 +236,13 @@
             await this.animalsRepository.SaveChangesAsync();
         }
 
-        public void Remove(int id)
+        public async Task DeleteAsync(int animalId)
         {
-            var animalToDelete = this.animalsRepository.All()
-                .Where(x => x.Id == id)
-                .FirstOrDefault();
+            var animal = this.animalsRepository.All()
+                .FirstOrDefault(x => x.Id == animalId);
 
-            this.animalsRepository.Delete(animalToDelete);
-            this.animalsRepository.SaveChangesAsync();
+            this.animalsRepository.Delete(animal);
+            await this.animalsRepository.SaveChangesAsync();
         }
     }
 }

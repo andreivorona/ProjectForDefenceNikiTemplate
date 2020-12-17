@@ -31,6 +31,6 @@
 
         Task UpdateAsync(int animalId, EditAnimalInputModel input);
 
-        void Remove(int id);
+        Task DeleteAsync(int animalId);
     }
 }

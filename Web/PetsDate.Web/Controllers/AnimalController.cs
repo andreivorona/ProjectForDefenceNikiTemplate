@@ -170,9 +170,9 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            this.animalService.Remove(id);
+            await this.animalService.DeleteAsync(id);
 
             return this.Redirect("/Animal/All");
         }
