@@ -19,6 +19,8 @@
 
         Task UpdateAsync(string sosSignalId, EditSosSignalInputModel input);
 
+        Task DeleteAsync(string sosSignalId);
+
         int GetCount();
     }
 }

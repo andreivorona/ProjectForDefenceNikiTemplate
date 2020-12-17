@@ -126,6 +126,15 @@
             await this.sosSignalsRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string sosSignalId)
+        {
+            var sosSignal = this.sosSignalsRepository.All()
+                .FirstOrDefault(x => x.Id == sosSignalId);
+
+            this.sosSignalsRepository.Delete(sosSignal);
+            await this.sosSignalsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.sosSignalsRepository.All().Count();

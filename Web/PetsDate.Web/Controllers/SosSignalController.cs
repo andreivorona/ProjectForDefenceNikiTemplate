@@ -112,5 +112,14 @@
 
             return this.Redirect("/SosSignal/All");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.sosSignalService.DeleteAsync(id);
+
+            return this.Redirect("/SosSignal/All");
+        }
     }
 }
