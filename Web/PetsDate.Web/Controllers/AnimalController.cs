@@ -176,5 +176,14 @@
 
             return this.Redirect("/Animal/All");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteImageFromCollection(int id)
+        {
+            await this.animalService.DeleteImageFromCollectionAsync(id);
+
+            return this.Redirect("/Animal/All");
+        }
     }
 }

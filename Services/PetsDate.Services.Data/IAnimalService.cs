@@ -23,6 +23,8 @@
 
         IEnumerable<AnimalImageListAllViewModel> GetAnimalImagesHomePage(int animalId);
 
+        Task DeleteImageFromCollectionAsync(int id);
+
         int GetCount();
 
         int GetImagesCount();

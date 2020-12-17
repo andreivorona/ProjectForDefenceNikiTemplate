@@ -145,6 +145,7 @@
                 .Where(x => x.UserId == userId && x.AnimalId == animalId)
                 .Select(x => new AnimalImageListAllViewModel
                 {
+                   Id = x.Id,
                    ImageUrl = x.ImageUrl,
                 }).ToList();
         }
@@ -243,6 +244,15 @@
 
             this.animalsRepository.Delete(animal);
             await this.animalsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteImageFromCollectionAsync(int id)
+        {
+            var element = this.animalImagesRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.animalImagesRepository.Delete(element);
+            await this.animalImagesRepository.SaveChangesAsync();
         }
     }
 }
