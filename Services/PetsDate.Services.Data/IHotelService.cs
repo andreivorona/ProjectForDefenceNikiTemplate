@@ -13,6 +13,8 @@
 
         IEnumerable<HotelListAllViewModel> GetAllHomePage();
 
+        HotelListAllViewModel GetInfo(string userId, string clinicId);
+
         int GetCount();
     }
 }

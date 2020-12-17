@@ -54,6 +54,16 @@
         }
 
         [Authorize]
+        public async Task<IActionResult> Info(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var viewModel = this.hotelService.GetInfo(user.Id, id);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
         public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)

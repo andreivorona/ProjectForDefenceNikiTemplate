@@ -61,6 +61,7 @@
                 .Take(itemsPerPage)
                 .Select(x => new HotelListAllViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Location = x.Location,
                     Description = x.Description,
@@ -79,6 +80,20 @@
                     ImageUrl = x.ImageUrl,
                     UserName = x.User.UserName,
                 }).ToList();
+        }
+
+        public HotelListAllViewModel GetInfo(string userId, string clinicId)
+        {
+            return this.hotelsRepository.AllAsNoTracking()
+                .Where(x => x.Id == clinicId && x.UserId == userId)
+                .Select(x => new HotelListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).FirstOrDefault();
         }
 
         public int GetCount()
