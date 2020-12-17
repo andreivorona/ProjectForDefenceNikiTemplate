@@ -76,5 +76,27 @@
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.publicationService.GetById(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id, EditPublicationInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.publicationService.UpdateAsync(id, input);
+
+            return this.Redirect("/Publication/All");
+        }
     }
 }

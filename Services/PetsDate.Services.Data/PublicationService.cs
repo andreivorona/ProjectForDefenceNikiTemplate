@@ -66,6 +66,29 @@
                 }).FirstOrDefault();
         }
 
+        public EditPublicationInputModel GetById(string publicationId)
+        {
+            var result = this.publicationRepository.AllAsNoTracking()
+                .Where(x => x.Id == publicationId)
+                .Select(x => new EditPublicationInputModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                }).FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task UpdateAsync(string publicationId, EditPublicationInputModel input)
+        {
+            var hotel = this.publicationRepository.All()
+                .FirstOrDefault(x => x.Id == publicationId);
+
+            hotel.Description = input.Description;
+
+            await this.publicationRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.publicationRepository.All().Count();

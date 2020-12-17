@@ -1,0 +1,27 @@
+﻿@model PetsDate.Web.ViewModels.Publication.EditPublicationInputModel
+
+@{
+    this.ViewData["Title"] = "Edit Publication";
+}
+
+<div class="text-center">
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
+
+    <section class="form-group">
+        <label asp-for="Description"></label>
+
+        <input asp-for="Description" class="form-control" placeholder="Description..." />
+
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </section>
+
+    <input type="submit" class="btn btn-dark  mt-3" value="Edit" />
+
+</form>
+
+<hr />
+
+<a class="btn btn-primary mb-2" asp-area="" asp-controller="Publication" asp-action="Info" asp-route-id="@Model.Id">Return</a>

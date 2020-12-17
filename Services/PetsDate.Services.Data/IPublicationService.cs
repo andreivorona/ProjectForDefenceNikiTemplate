@@ -15,6 +15,10 @@
 
         PublicationListAllViewModel GetInfo(string userId, string publicationId);
 
+        EditPublicationInputModel GetById(string publicationId);
+
+        Task UpdateAsync(string publicationId, EditPublicationInputModel input);
+
         int GetCount();
     }
 }
