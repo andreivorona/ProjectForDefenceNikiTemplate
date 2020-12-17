@@ -96,6 +96,35 @@
                 }).FirstOrDefault();
         }
 
+        public EditHotelInputModel GetById(string hotelId)
+        {
+            var result = this.hotelsRepository.AllAsNoTracking()
+                .Where(x => x.Id == hotelId)
+                .Select(x => new EditHotelInputModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    Description = x.Description,
+                }).FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task UpdateAsync(string hotelId, EditHotelInputModel input)
+        {
+            var hotel = this.hotelsRepository.All()
+                .FirstOrDefault(x => x.Id == hotelId);
+
+            hotel.Name = input.Name;
+            hotel.ImageUrl = input.ImageUrl;
+            hotel.Location = input.Location;
+            hotel.Description = input.Description;
+
+            await this.hotelsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.hotelsRepository.All().Count();

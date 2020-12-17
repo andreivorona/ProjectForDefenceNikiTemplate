@@ -15,6 +15,10 @@
 
         HotelListAllViewModel GetInfo(string userId, string hotelId);
 
+        EditHotelInputModel GetById(string hotelId);
+
+        Task UpdateAsync(string hotelId, EditHotelInputModel input);
+
         int GetCount();
     }
 }

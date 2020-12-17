@@ -85,5 +85,27 @@
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.hotelService.GetById(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id, EditHotelInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.hotelService.UpdateAsync(id, input);
+
+            return this.Redirect("/Hotel/All");
+        }
     }
 }
