@@ -120,6 +120,15 @@
             await this.clinicsRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string clinicId)
+        {
+            var animal = this.clinicsRepository.All()
+                .FirstOrDefault(x => x.Id == clinicId);
+
+            this.clinicsRepository.Delete(animal);
+            await this.clinicsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.clinicsRepository.All().Count();

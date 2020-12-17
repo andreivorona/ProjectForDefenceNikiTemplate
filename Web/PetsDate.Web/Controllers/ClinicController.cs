@@ -109,5 +109,14 @@
 
             return this.Redirect("/Clinic/All");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.clinicService.DeleteAsync(id);
+
+            return this.Redirect("/Clinic/All");
+        }
     }
 }

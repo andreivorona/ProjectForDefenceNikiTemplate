@@ -19,6 +19,8 @@
 
         Task UpdateAsync(string clinicId, EditClinicInputModel input);
 
+        Task DeleteAsync(string clinicId);
+
         int GetCount();
     }
 }
