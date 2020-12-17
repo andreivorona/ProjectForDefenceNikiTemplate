@@ -98,5 +98,14 @@
 
             return this.Redirect("/Publication/All");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.publicationService.DeleteAsync(id);
+
+            return this.Redirect("/Publication/All");
+        }
     }
 }

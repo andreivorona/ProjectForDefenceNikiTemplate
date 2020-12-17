@@ -19,6 +19,8 @@
 
         Task UpdateAsync(string publicationId, EditPublicationInputModel input);
 
+        Task DeleteAsync(string publicationId);
+
         int GetCount();
     }
 }

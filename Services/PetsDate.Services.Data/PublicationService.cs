@@ -89,6 +89,15 @@
             await this.publicationRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string publicationId)
+        {
+            var publication = this.publicationRepository.All()
+                .FirstOrDefault(x => x.Id == publicationId);
+
+            this.publicationRepository.Delete(publication);
+            await this.publicationRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.publicationRepository.All().Count();
