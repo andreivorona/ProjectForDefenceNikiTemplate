@@ -15,6 +15,10 @@
 
         ClinicListAllViewModel GetInfo(string userId, string clinicId);
 
+        EditClinicInputModel GetById(string clinicId);
+
+        Task UpdateAsync(string clinicId, EditClinicInputModel input);
+
         int GetCount();
     }
 }

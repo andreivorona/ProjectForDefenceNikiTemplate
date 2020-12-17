@@ -93,6 +93,33 @@
                 }).FirstOrDefault();
         }
 
+        public EditClinicInputModel GetById(string clinicId)
+        {
+            var result = this.clinicsRepository.AllAsNoTracking()
+                .Where(x => x.Id == clinicId)
+                .Select(x => new EditClinicInputModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                }).FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task UpdateAsync(string clinicId, EditClinicInputModel input)
+        {
+            var clinic = this.clinicsRepository.All()
+                .FirstOrDefault(x => x.Id == clinicId);
+
+            clinic.Name = input.Name;
+            clinic.ImageUrl = input.ImageUrl;
+            clinic.Location = input.Location;
+
+            await this.clinicsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.clinicsRepository.All().Count();

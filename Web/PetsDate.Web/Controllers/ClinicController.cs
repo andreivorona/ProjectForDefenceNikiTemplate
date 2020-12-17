@@ -87,5 +87,27 @@
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.clinicService.GetById(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id, EditClinicInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.clinicService.UpdateAsync(id, input);
+
+            return this.Redirect("/Clinic/All");
+        }
     }
 }
