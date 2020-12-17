@@ -60,6 +60,7 @@
                 .Take(itemsPerPage)
                 .Select(x => new ClinicListAllViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Location = x.Location,
                     ImageUrl = x.ImageUrl,
@@ -76,6 +77,20 @@
                     ImageUrl = x.ImageUrl,
                     UserName = x.User.UserName,
                 }).ToList();
+        }
+
+        public ClinicListAllViewModel GetInfo(string userId, string clinicId)
+        {
+            return this.clinicsRepository.AllAsNoTracking()
+                .Where(x => x.Id == clinicId && x.UserId == userId)
+                .Select(x => new ClinicListAllViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    UserName = x.User.UserName,
+                }).FirstOrDefault();
         }
 
         public int GetCount()

@@ -15,9 +15,10 @@
             <img class="card-img-top" src="@clinic.ImageUrl" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@clinic.Name</h5>
-                
+
                 <p class="card-text">Location: @clinic.Location</p>
 
+                <a class="btn btn-primary mb-2" asp-area="" asp-controller="Clinic" asp-action="Info" asp-route-id="@clinic.Id">Info Page</a>
             </div>
         </div>
     }

@@ -13,6 +13,7 @@
 
         IEnumerable<ClinicListAllViewModel> GetAllHomePage();
 
+        ClinicListAllViewModel GetInfo(string userId, string clinicId);
 
         int GetCount();
     }
