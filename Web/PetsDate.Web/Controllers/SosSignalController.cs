@@ -90,5 +90,27 @@
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.sosSignalService.GetById(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id, EditSosSignalInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.sosSignalService.UpdateAsync(id, input);
+
+            return this.Redirect("/SosSignal/All");
+        }
     }
 }

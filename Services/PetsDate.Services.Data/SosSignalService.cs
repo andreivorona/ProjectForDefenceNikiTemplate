@@ -97,6 +97,35 @@
                 }).FirstOrDefault();
         }
 
+        public EditSosSignalInputModel GetById(string sosSignalId)
+        {
+            var result = this.sosSignalsRepository.AllAsNoTracking()
+                .Where(x => x.Id == sosSignalId)
+                .Select(x => new EditSosSignalInputModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Location = x.Location,
+                    ImageUrl = x.ImageUrl,
+                    Description = x.Description,
+                }).FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task UpdateAsync(string sosSignalId, EditSosSignalInputModel input)
+        {
+            var sosSignal = this.sosSignalsRepository.All()
+                .FirstOrDefault(x => x.Id == sosSignalId);
+
+            sosSignal.Name = input.Name;
+            sosSignal.ImageUrl = input.ImageUrl;
+            sosSignal.Location = input.Location;
+            sosSignal.Description = input.Description;
+
+            await this.sosSignalsRepository.SaveChangesAsync();
+        }
+
         public int GetCount()
         {
             return this.sosSignalsRepository.All().Count();

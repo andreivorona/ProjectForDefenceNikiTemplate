@@ -15,6 +15,10 @@
 
         SosSignalListAllViewModel GetInfo(string userId, string sosSignalId);
 
+        EditSosSignalInputModel GetById(string sosSignalId);
+
+        Task UpdateAsync(string sosSignalId, EditSosSignalInputModel input);
+
         int GetCount();
     }
 }
