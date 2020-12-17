@@ -38,7 +38,8 @@
                 .Take(itemsPerPage)
                 .Select(x => new PublicationListAllViewModel
                 {
-                    Username = x.User.UserName,
+                    Id = x.Id,
+                    UserName = x.User.UserName,
                     Description = x.Description,
                 }).ToList();
         }
@@ -48,10 +49,21 @@
             return this.publicationRepository.AllAsNoTracking()
                 .Select(x => new PublicationListAllViewModel
                 {
-                    Username = x.User.UserName,
                     Description = x.Description,
                     UserName = x.User.UserName,
                 }).ToList();
+        }
+
+        public PublicationListAllViewModel GetInfo(string userId, string publicationId)
+        {
+            return this.publicationRepository.AllAsNoTracking()
+                .Where(x => x.Id == publicationId && x.UserId == userId)
+                .Select(x => new PublicationListAllViewModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    UserName = x.User.UserName,
+                }).FirstOrDefault();
         }
 
         public int GetCount()

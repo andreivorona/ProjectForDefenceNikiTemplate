@@ -82,10 +82,10 @@
                 }).ToList();
         }
 
-        public HotelListAllViewModel GetInfo(string userId, string clinicId)
+        public HotelListAllViewModel GetInfo(string userId, string hotelId)
         {
             return this.hotelsRepository.AllAsNoTracking()
-                .Where(x => x.Id == clinicId && x.UserId == userId)
+                .Where(x => x.Id == hotelId && x.UserId == userId)
                 .Select(x => new HotelListAllViewModel
                 {
                     Id = x.Id,

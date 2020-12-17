@@ -13,6 +13,8 @@
 
         IEnumerable<PublicationListAllViewModel> GetAllHomePage();
 
+        PublicationListAllViewModel GetInfo(string userId, string publicationId);
+
         int GetCount();
     }
 }

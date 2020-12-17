@@ -14,9 +14,11 @@
         <div class="card col-md-3 mt-4 mr-4">
             
             <div class="card-body">
-                <h5 class="card-title">@publication.Username</h5>
+                <h5 class="card-title">@publication.UserName</h5>
 
                 <p class="card-text">Description: @publication.Description</p>
+
+                <a class="btn btn-primary mb-2" asp-area="" asp-controller="Publication" asp-action="Info" asp-route-id="@publication.Id">Info Page</a>
 
             </div>
         </div>

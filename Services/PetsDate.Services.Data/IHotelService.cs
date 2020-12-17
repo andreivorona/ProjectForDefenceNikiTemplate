@@ -13,7 +13,7 @@
 
         IEnumerable<HotelListAllViewModel> GetAllHomePage();
 
-        HotelListAllViewModel GetInfo(string userId, string clinicId);
+        HotelListAllViewModel GetInfo(string userId, string hotelId);
 
         int GetCount();
     }
