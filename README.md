@@ -33,8 +33,12 @@ Both client-side and server-side,
 
 12)Cloudinary - images are safe in Cloudinary - cloudinaryService,
 
-13)Host in Azure,
+13)ajax for stars and votes in Animal Info, and custom logic for stars.
+
+14)Host in Azure,
 https://petsdate.azurewebsites.net,
+
+
 
 
 
