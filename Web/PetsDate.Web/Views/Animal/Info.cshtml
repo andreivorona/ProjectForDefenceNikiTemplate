@@ -20,21 +20,22 @@
 
     <ul class="item-rating">
 
-        <li class="star-fill" data-vote="1">
-            <i class="fas fa-star"></i>
-        </li>
-        <li class="star-fill" data-vote="2">
-            <i class="fas fa-star"></i>
-        </li>
-        <li class="star-fill" data-vote="3">
-            <i class="fas fa-star"></i>
-        </li>
-        <li class="star-fill" data-vote="4">
-            <i class="fas fa-star"></i>
-        </li>
-        <li class="star-fill" data-vote="5">
-            <i class="fas fa-star"></i>
-        </li>
+            <li class="star-fill" data-vote="1">
+                <i class="fas fa-star" id="first"></i>
+            </li>
+            <li class="star-fill" data-vote="2">
+                <i class="fas fa-star" id="second"></i>
+            </li>
+            <li class="star-fill" data-vote="3">
+                <i class="fas fa-star" id="third"></i>
+            </li>
+            <li class="star-fill" data-vote="4">
+                <i class="fas fa-star" id="fourth"></i>
+            </li>
+            <li class="star-fill" data-vote="5">
+                <i class="fas fa-star" id="fifth"></i>
+            </li>
+        
         <li><span id="averageVoteValue">@Model.VotesAverageValue.ToString("0.0")</span><span> / 5</span></li>
     </ul>
 
@@ -50,8 +51,32 @@
 </div>
 
 <form method="post" id="antiForgeryForm">
-
 </form>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title">Delete Animal</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <p>Do you want to delete "@Model.Name"?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>
@@ -74,7 +99,47 @@
                     },
                     success: function (data) {
                         $('#averageVoteValue').html(data.averageVote.toFixed(1));
-                        console.log(data.averageVote);
+
+                        if (data.averageVote >= 1 && data.averageVote < 2)
+                            $('#first').addClass("orange-star"),
+                            $('#second').addClass("grey-star"),
+                            $('#third').addClass("grey-star"),
+                            $('#fourth').addClass("grey-star"),
+                            $('#fifth').addClass("grey-star");
+
+                        if (data.averageVote >= 2 && data.averageVote < 3)
+                            $('#second').removeClass("grey-star"),
+                            $('#second').addClass("orange-star"),
+                            $('#third').addClass("grey-star"),
+                            $('#fourth').addClass("grey-star"),
+                            $('#fifth').addClass("grey-star");
+
+                        if (data.averageVote >= 3 && data.averageVote < 4)
+                            $('#second').removeClass("grey-star"),
+                            $('#second').addClass("orange-star"),
+                            $('#third').removeClass("grey-star"),
+                            $('#third').addClass("orange-star"),
+                            $('#fourth').addClass("grey-star"),
+                            $('#fifth').addClass("grey-star");
+
+                        if (data.averageVote >= 4 && data.averageVote < 5)
+                            $('#second').removeClass("grey-star"),
+                            $('#second').addClass("orange-star"),
+                            $('#third').removeClass("grey-star"),
+                            $('#third').addClass("orange-star"),
+                            $('#fourth').removeClass("grey-star"),
+                            $('#fourth').addClass("orange-star"),
+                            $('#fifth').addClass("grey-star");
+
+                        if (data.averageVote >= 5)
+                            $('#second').removeClass("grey-star"),
+                            $('#second').addClass("orange-star"),
+                            $('#third').removeClass("grey-star"),
+                            $('#third').addClass("orange-star"),
+                            $('#fourth').removeClass("grey-star"),
+                            $('#fourth').addClass("orange-star"),
+                            $('#fifth').removeClass("grey-star"),
+                            $('#fifth').addClass("orange-star");
                     },
                     contentType: 'application/json',
                 });
@@ -82,28 +147,3 @@
         });
     </script>
 }
-
-<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h5 class="modal-title">Delete Animal</h5>
-                
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-            </div>
-
-            <div class="modal-body">
-                <p>Do you want to delete "@Model.Name"?</p>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>

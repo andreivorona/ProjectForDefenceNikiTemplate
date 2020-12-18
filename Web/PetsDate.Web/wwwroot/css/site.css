@@ -180,8 +180,12 @@ a {
     justify-content: center;
 }
 
-.star-fill {
+.orange-star {
     color: orange;
+}
+
+.grey-star {
+    color: gray;
 }
 
 
