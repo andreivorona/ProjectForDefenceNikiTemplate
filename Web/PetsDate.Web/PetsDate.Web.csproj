@@ -12,9 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Administration\Views\Dashboard\**" />
     <Compile Remove="wwwroot\AnimalImages\**" />
+    <Content Remove="Areas\Administration\Views\Dashboard\**" />
     <Content Remove="wwwroot\AnimalImages\**" />
+    <EmbeddedResource Remove="Areas\Administration\Views\Dashboard\**" />
     <EmbeddedResource Remove="wwwroot\AnimalImages\**" />
+    <None Remove="Areas\Administration\Views\Dashboard\**" />
     <None Remove="wwwroot\AnimalImages\**" />
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +62,5 @@
     <ProjectReference Include="..\..\Services\PetsDate.Services\PetsDate.Services.csproj" />
     <ProjectReference Include="..\PetsDate.Web.Infrastructure\PetsDate.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\PetsDate.Web.ViewModels\PetsDate.Web.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Dashboard\" />
   </ItemGroup>
 </Project>

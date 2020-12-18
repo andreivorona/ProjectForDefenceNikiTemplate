@@ -58,6 +58,10 @@ body {
     .offset-3 {
         margin-left: 0;
     }
+
+    .container {
+        text-align: center;
+    }
 }
 
 @media (min-width: 768px) {
@@ -186,6 +190,13 @@ a {
 
 .grey-star {
     color: gray;
+}
+
+.footer-link {
+    padding-left: 10px;
+    font-size: 20px;
+    color: white;
+    text-decoration: underline;
 }
 
 
