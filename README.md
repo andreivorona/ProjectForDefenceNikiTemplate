@@ -6,12 +6,12 @@
 6 controllers,
 
 2) Visual Studio 2019,
-Razor,
+Razor template engine,
 partial views,
 
 3)Microsoft SQL Server,
 
-4)Entity Framework Core,
+4)Entity Framework 5.0,
 
 5)MVC Areas,
 Admin Role,
