@@ -1,10 +1,44 @@
 # ProjectForDefenceNikiTemplate APS.NET Core
 
-.Net 5.0,
+1).Net 5.0,
+25 views,
+8 entity models,
+6 controllers,
+
+2) Visual Studio 2019,
+Razor,
+partial views,
+
+3)Microsoft SQL Server,
+
+4)Entity Framework Core,
+
+5)MVC Areas,
 Admin Role,
-Cloudinary - images are safe in Cloudinary - cloudinaryService,
-Entity Framework 5.0,
+
+6)responsive design,
+own design, 
 Custom style in site.css,
-Responsive for all devices,
-Chat - added hub,
+
+7)your own user management system,
+
+8)data validation,
+Both client-side and server-side,
+
+9)Dependency Injection,
+
+10)Prevent from security vulnerabilities like SQL Injection, XSS, CSRF, parameter tampering, etc.,
+
+11)SignalR - Chat - added hub,
+
+12)Cloudinary - images are safe in Cloudinary - cloudinaryService,
+
+13)Host in Azure,
+https://petsdate.azurewebsites.net,
+
+
+
+
+
+
 
